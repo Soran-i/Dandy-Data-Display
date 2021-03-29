@@ -1,0 +1,247 @@
+Afghanistan:AFG
+Albania:ALB
+Algeria:DZA
+American Samoa:ASM
+Andorra:AND
+Angola:AGO
+Anguilla:AIA
+Antarctica:ATA
+Antigua and Barbuda:ATA
+Argentina:ARG
+Armenia:ARM
+Aruba:ABW
+Australia:AUS
+Austria:AUT
+Azerbaijan:AZE
+Bahamas:BHS
+Bahrain:BHR
+Bangladesh:BGD
+Barbados:BRB
+Belarus:BLR
+Belgium:BEL
+Belgium-Luxembourg:BEL
+Belize:BLZ
+Benin:BEN
+Bermuda:BMU
+Bhutan:BTN
+Bolivia (Plurinational State of):BOL
+Bonaire:BES
+Bosnia Herzegovina:BIH
+Botswana:BWA
+Br. Indian Ocean Terr.:IOT
+Br. Virgin Isds:VGB
+Brazil:BRA
+Brunei Darussalam:BRN
+Bulgaria:BGR
+Burkina Faso:BFA
+Burundi:BDI
+Cabo Verde:CPV
+Cambodia:KHM
+Cameroon:CMR
+Canada:CAN
+Cayman Isds:CYM
+Central African Rep.:CAF
+Chad:TCD
+Chile:CHL
+China:CHN
+China, Hong Kong SAR:HKG
+China, Macao SAR:MAC
+Christmas Isds:CXR
+Cocos Isds:CCK
+Colombia:COL
+Comoros:COM
+Congo:COG
+Cook Isds:COK
+Costa Rica:CRI
+C“te d'Ivoire:CIV
+Croatia:HRV
+Cuba:CUB
+Cura‡ao:CUW
+Cyprus:CYP
+Czechia:CZE
+Czechoslovakia:CSK
+Dem. People's Rep. of Korea:PRK
+Dem. Rep. of the Congo:COD
+Denmark:DNK
+Djibouti:DJI
+Dominica:DMA
+Dominican Rep.:DOM
+East and West Pakistan:PAK
+Ecuador:ECU
+Egypt:EGY
+El Salvador:SLV
+Equatorial Guinea:GNQ
+Eritrea:ERI
+Estonia:EST
+Ethiopia:ETH
+EU-28:EU2
+Faeroe Isds:FRO
+Falkland Isds (Malvinas):FLK
+Fiji:FJI
+Finland:FIN
+Fr. South Antarctic Terr.:ATF
+France:FRA
+French Guiana:GUF
+French Polynesia:PYF
+FS Micronesia:FSM
+Gabon:GAB
+Gambia:GMB
+Georgia:GEO
+Germany:DEU
+Ghana:GHA
+Gibraltar:GIB
+Greece:GRC
+Greenland:GRL
+Grenada:GRD
+Guadeloupe:GLP
+Guam:GUM
+Guatemala:GTM
+Guinea:GIN
+Guinea-Bissau:GNB
+Guyana:GUY
+Haiti:HTI
+Heard Island and McDonald Islands:HMD
+Holy See (Vatican City State):VAT
+Honduras:HND
+Hungary:HUN
+Iceland:ISL
+India:IND
+Indonesia:IDN
+Iran:IRN
+Iraq:IRQ
+Ireland:IRL
+Israel:ISR
+Italy:ITA
+Jamaica:JAM
+Japan:JPN
+Jordan:JOR
+Kazakhstan:KAZ
+Kenya:KEN
+Kiribati:KIR
+Kuwait:KWT
+Kyrgyzstan:KGZ
+Lao People's Dem. Rep.:LAO
+Latvia:LVA
+Lebanon:LBN
+Lesotho:LSO
+Liberia:LBR
+Libya:LBY
+Lithuania:LTU
+Luxembourg:LUX
+Madagascar:MDG
+Malawi:MWI
+Malaysia:MYS
+Maldives:MDV
+Mali:MLI
+Malta:MLT
+Marshall Isds:MHL
+Martinique:MTQ
+Mauritania:MRT
+Mauritius:MUS
+Mayotte:MYT
+Mexico:MEX
+Mongolia:MNG
+Montenegro:MNE
+Montserrat:MSR
+Morocco:MAR
+Mozambique:MOZ
+Myanmar:MMR
+N. Mariana Isds:MNP
+Namibia:NAM
+Nauru:NRU
+Nepal:NPL
+Neth. Antilles:ANT
+Netherlands:NLD
+New Caledonia:NCL
+New Zealand:NZL
+Nicaragua:NIC
+Niger:NER
+Nigeria:NGA
+Niue:NIU
+Norfolk Isds:NFK
+Norway:NOR
+Oman:OMN
+Pakistan:PAK
+Palau:PLW
+Panama:PAN
+Papua New Guinea:PNG
+Paraguay:PRY
+Peru:PER
+Philippines:PHL
+Pitcairn:PCN
+Poland:POL
+Portugal:PRT
+Qatar:QAT
+Rep. of Korea:KOR
+Rep. of Moldova:MDA
+R‚union:REU
+Romania:ROU
+Russian Federation:RUS
+Rwanda:RWA
+Saint Barth‚lemy:BLM
+Saint Helena:SHN
+Saint Kitts and Nevis:KNA
+Saint Kitts, Nevis and Anguilla:KNA
+Saint Lucia:LCA
+Saint Maarten:SXM
+Saint Pierre and Miquelon:SPM
+Saint Vincent and the Grenadines:VCT
+Samoa:WSM
+San Marino:SMR
+Sao Tome and Principe:STP
+Saudi Arabia:SAU
+Senegal:SEN
+Serbia:SRB
+Serbia and Montenegro:SCG
+Seychelles:SYC
+Sierra Leone:SLE
+Singapore:SGP
+Slovakia:SVK
+Slovenia:SVN
+So. African Customs Union:ZAF
+Solomon Isds:SLB
+Somalia:SOM
+South Africa:ZAF
+South Georgia and the South Sandwich Islands:SGS
+South Sudan:SSD
+Spain:ESP
+Sri Lanka:LKA
+State of Palestine:PSE
+Sudan:SDN
+Suriname:SUR
+Swaziland:SWZ
+Sweden:SWE
+Switzerland:CHE
+Syria:SYR
+Tajikistan:TJK
+TFYR of Macedonia:MKD
+Thailand:THA
+Timor-Leste:TLS
+Togo:TGO
+Tokelau:TKL
+Tonga:TON
+Trinidad and Tobago:TTO
+Tunisia:TUN
+Turkey:TUR
+Turkmenistan:TKM
+Turks and Caicos Isds:TCA
+Tuvalu:TUV
+Uganda:UGA
+Ukraine:UKR
+United Arab Emirates:ARE
+United Kingdom:GBR
+United Rep. of Tanzania:TZA
+United States Minor Outlying Islands:UMI
+Uruguay:URY
+US Virgin Isds:VIR
+USA:USA
+Uzbekistan:UZB
+Vanuatu:VUT
+Venezuela:VEN
+Viet Nam:VNM
+Wallis and Futuna Isds:WLF
+Western Sahara:ESH
+World:WLD
+Yemen:YEM
+Zambia:ZMB
+Zimbabwe:ZWE
