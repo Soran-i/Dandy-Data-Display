@@ -1,7 +1,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 public class ForestAnalysis extends Analysis {
 	private String  ForestAreaIndicator = "AG.LND.FRST.ZS";
@@ -12,10 +12,10 @@ public class ForestAnalysis extends Analysis {
 	
 	private String Title = "Average Forest Area (% of land area)"; 
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public ForestAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	public ResultsStruct performAnalysis(ParamStruct params) {

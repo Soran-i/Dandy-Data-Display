@@ -1,7 +1,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 public class PolnForestAnalysis extends Analysis {
 	private String  AirPolnIndicator = "EN.ATM.PM25.MC.M3";
@@ -15,10 +15,10 @@ public class PolnForestAnalysis extends Analysis {
 	
 	private String Title = " PM2.5 air Pollution vs Forest Area"; 
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public PolnForestAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	public ResultsStruct performAnalysis(ParamStruct params) {

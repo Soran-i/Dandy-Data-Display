@@ -1,7 +1,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 public class EducationHealthAnalysis extends Analysis {
 	private String  HealthExpendGDPIndicator = "SH.XPD.CHEX.GD.ZS";
@@ -13,10 +13,10 @@ public class EducationHealthAnalysis extends Analysis {
 	
 	private String Title = "Ratio of Government expenditure on education, total and Current health expenditure"; 
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public EducationHealthAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	public ResultsStruct performAnalysis(ParamStruct params) {

@@ -2,7 +2,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 public class HospitalAnalysis extends Analysis {
 	private String  HospitalBedsIndicator = "SH.MED.BEDS.ZS";
@@ -14,10 +14,10 @@ public class HospitalAnalysis extends Analysis {
 	
 	private String Title = "Ratio of Hospital beds and Current health expenditure"; 
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public HospitalAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	public ResultsStruct performAnalysis(ParamStruct params) {

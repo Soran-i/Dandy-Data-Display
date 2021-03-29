@@ -1,7 +1,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 public class EducationAnalysis extends Analysis {
 	private String  EducationIndicator = "SE.XPD.TOTL.GD.ZS";
@@ -12,10 +12,10 @@ public class EducationAnalysis extends Analysis {
 	
 	private String Title = "Government Expenditure on education, total (% of GDP)"; 
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public EducationAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	

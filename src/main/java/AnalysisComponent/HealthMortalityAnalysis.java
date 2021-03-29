@@ -1,7 +1,7 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacade;
+import WorldBankReader.WorldBankFacadeMocked;
 
 
 public class HealthMortalityAnalysis extends Analysis {
@@ -16,10 +16,10 @@ public class HealthMortalityAnalysis extends Analysis {
 	
 	private String Title = "Current Health Expenditure per capital vs Mortality rate, infant";
 	
-	private WorldBankFacade Reader; 
+	private WorldBankFacadeMocked Reader; 
 	
 	public HealthMortalityAnalysis(){
-		Reader = new WorldBankFacade(); 
+		Reader = new WorldBankFacadeMocked(); 
 	}
 	
 	public ResultsStruct performAnalysis(ParamStruct params) {
