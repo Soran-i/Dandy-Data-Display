@@ -1,7 +1,8 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 public class PolnForestAnalysis extends Analysis {
 	private String  AirPolnIndicator = "EN.ATM.PM25.MC.M3";
@@ -15,13 +16,13 @@ public class PolnForestAnalysis extends Analysis {
 	
 	private String Title = " PM2.5 air Pollution vs Forest Area"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public PolnForestAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
 		ReaderResults AirPoln = Reader.RequestData(AirPolnIndicator,params._yearStart,params._yearEnd,params._country); 
@@ -30,8 +31,8 @@ public class PolnForestAnalysis extends Analysis {
 		Vector<Double> AirPolnsData = AirPoln.NumericData;
 		
 		ResultsStruct ResultReturn = new ResultsStruct();
-		ResultReturn.Results.add(ForestAreaData);
-		ResultReturn.Results.add(AirPolnsData); 
+		ResultReturn.Results.add(AirPolnsData);
+		ResultReturn.Results.add(ForestAreaData); 
 		
 		ResultReturn.Years = ForestArea.Years;
 		

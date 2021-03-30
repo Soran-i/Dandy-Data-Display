@@ -1,7 +1,8 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 public class EducationHealthAnalysis extends Analysis {
 	private String  HealthExpendGDPIndicator = "SH.XPD.CHEX.GD.ZS";
@@ -13,13 +14,13 @@ public class EducationHealthAnalysis extends Analysis {
 	
 	private String Title = "Ratio of Government expenditure on education, total and Current health expenditure"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public EducationHealthAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults Education = Reader.RequestData(EducationIndicator,params._yearStart,params._yearEnd,params._country); 
 		ReaderResults HealthExpendGDP = Reader.RequestData(HealthExpendGDPIndicator,params._yearStart,params._yearEnd,params._country);  

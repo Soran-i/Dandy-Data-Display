@@ -1,7 +1,8 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 
 public class CO2EnergyPolnAnalysis extends Analysis {
@@ -19,13 +20,13 @@ public class CO2EnergyPolnAnalysis extends Analysis {
 	
 	private String Title = "C02 emissions vs energy use vs PM2.5 air Pollution"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public CO2EnergyPolnAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults CO2Emis= Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 
 		ReaderResults EnergyUse = Reader.RequestData(EnergyUseIndicator,params._yearStart,params._yearEnd,params._country); 

@@ -1,14 +1,11 @@
 package WorldBankReader;
-import java.util.Vector;
-
-import AnalysisComponent.ReaderResults; 
+import java.util.Vector; 
 
 public class WorldBankFacadeMocked {
 	
 	public ReaderResults RequestData(String Indicator,String YearStart, String YearEnd, String Country) {
 		Vector<Double> Data = new Vector<Double>(); 
 		Vector<Integer> YearsVect = new Vector<Integer>(); 
-		String unit = new String(); 	
 		
 		Data.add(1.); 
 		Data.add(0.); 
@@ -22,14 +19,12 @@ public class WorldBankFacadeMocked {
 		YearsVect.add(2002);
 		YearsVect.add(2003);
 		YearsVect.add(2004);
-		
-		unit = "all"; 
+	
 		
 		ReaderResults Results = new ReaderResults(); 
 		
 		Results.NumericData = Data; 
 		Results.Years = YearsVect; 
-		Results.units = unit; 
 		
 		
 		return Results; 

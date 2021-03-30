@@ -3,12 +3,12 @@ package AnalysisComponent;
 import java.util.*;
 
 abstract class Analysis {
-	public abstract ResultsStruct performAnalysis(ParamStruct params); 
+	public abstract ResultsStruct performAnalysis(ParamStruct params) throws Exception; 
 	
 	
 	public static void main(String[] args)
 	{
-		Analysis Analysis = new PolnForestAnalysis(); 
+		Analysis Analysis = new EducationAnalysis(); 
 		ParamStruct Params = new ParamStruct(); 
 		
 		Params._country = "CAN"; 
@@ -16,7 +16,13 @@ abstract class Analysis {
 		Params._yearEnd = "2004";
 		
 		
-		ResultsStruct Res = Analysis.performAnalysis(Params);
+		ResultsStruct Res = new ResultsStruct();
+		try {
+			Res = Analysis.performAnalysis(Params);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Vector<String> Units = Res.Units; 
 		

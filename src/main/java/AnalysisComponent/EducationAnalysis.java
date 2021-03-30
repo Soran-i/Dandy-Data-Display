@@ -1,7 +1,9 @@
 package AnalysisComponent;
+import java.text.DecimalFormat;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 public class EducationAnalysis extends Analysis {
 	private String  EducationIndicator = "SE.XPD.TOTL.GD.ZS";
@@ -12,18 +14,20 @@ public class EducationAnalysis extends Analysis {
 	
 	private String Title = "Government Expenditure on education, total (% of GDP)"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public EducationAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults Education = Reader.RequestData(EducationIndicator,params._yearStart,params._yearEnd,params._country); 
 
 		Vector<Double> EducationData = Education.NumericData;
+		
+		EducationData =  DivBy100(EducationData); 
 		
 		ResultsStruct ResultReturn = new ResultsStruct();
 		ResultReturn.Results.add(EducationData);
@@ -38,5 +42,18 @@ public class EducationAnalysis extends Analysis {
 		
 		return ResultReturn; 
 		
+	}
+	
+	private Vector<Double> DivBy100(Vector<Double> Element1) {
+		Vector<Double> Ratio = new Vector<Double>();
+		
+		DecimalFormat df = new DecimalFormat("#.####");
+		
+		for(int i = 0; i < Element1.size(); i++)
+		{
+			Ratio.add(Double.valueOf(df.format(Element1.get(i)/100.)));
+		}
+		
+		return Ratio; 
 	}
 } 

@@ -1,7 +1,8 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 public class C02GDPAnalysis extends Analysis {
 
@@ -14,13 +15,13 @@ public class C02GDPAnalysis extends Analysis {
 	
 	private String Title = "Ratio of C02 emissions and GDP per capita"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public C02GDPAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults C02Emissions = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 
 		ReaderResults GDP = Reader.RequestData(GDPIndicator,params._yearStart,params._yearEnd,params._country); 

@@ -3,11 +3,6 @@ package WorldBankReader;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import AnalysisComponent.Analysis;
-import AnalysisComponent.ParamStruct;
-import AnalysisComponent.PolnForestAnalysis;
-import AnalysisComponent.ResultsStruct;
-
 /**
  * This class makes a request and requests the data
  * 
@@ -31,9 +26,13 @@ public class WorldBankFacade {
 	 * @param endYear
 	 * @param indicator
 	 * @param country
+	 * @throws Exception 
 	 */
-	public void requestData(String startYear, String endYear, String indicator, String country) {
-		makeRequest(startYear, endYear, indicator, country);
+	public ReaderResults RequestData(String indicator, String startYear, String endYear, String country) throws Exception {
+		
+		fetcher.getData(startYear, endYear, indicator, country);
+		ReaderResults Res = parser.parserJson(fetcher.makeRequest());
+		return Res;
 	}
 
 	/**
@@ -43,17 +42,48 @@ public class WorldBankFacade {
 	 * @param endYear
 	 * @param indicator
 	 * @param country
+	 * @throws Exception 
 	 */
-	private void makeRequest(String startYear, String endYear, String indicator, String country) {
-		fetcher.getData(startYear, endYear, indicator, country);
-		parser.parserJson(fetcher.makeRequest());
-	}
 	
-	public static void main(String[] args)
-	{
-		WorldBankFacade WorldReader = new WorldBankFacade(); 
-		WorldReader.requestData("2000", "2004", "EN.ATM.CO2E.PC", "CAN");
-	}
-	
-
+//	public static void main(String[] args)
+//	{
+//		WorldBankFacade WorldReader = new WorldBankFacade(); 
+//		ReaderResults Res = new ReaderResults(); 
+//		
+//		try {
+//			Res = WorldReader.RequestData("2000", "2005", "EN.ATM.PM25.MC.M3", "CAN");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			
+//		}
+//		
+//		
+//		Vector<Double> Data = Res.NumericData; 
+//		
+//		Enumeration vEnum = Data.elements();
+//		System.out.println("\nPulled Data:");
+//		while(vEnum.hasMoreElements())
+//		    System.out.print(vEnum.nextElement() + " ");
+//		
+//		
+//		Vector<Integer> Years = Res.Years; 
+//		
+//		vEnum = Years.elements();
+//		System.out.println("\nYears:");
+//		while(vEnum.hasMoreElements())
+//		    System.out.print(vEnum.nextElement() + " ");	
+//		
+//		Vector<Integer> Test = new Vector<Integer>(); 
+//		Test.add(2000); 
+//		Test.add(2001); 
+//		Test.add(2002); 
+//		Test.add(2003); 
+//		Test.add(2004); 
+//		
+//		vEnum = Test.elements();
+//		System.out.println("\nTest:");
+//		while(vEnum.hasMoreElements())
+//		    System.out.print(vEnum.nextElement() + " ");
+//	}
+//	
 }

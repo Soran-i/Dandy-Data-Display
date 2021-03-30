@@ -1,7 +1,8 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
 
 public class HealthMortalityAnalysis extends Analysis {
@@ -16,13 +17,13 @@ public class HealthMortalityAnalysis extends Analysis {
 	
 	private String Title = "Current Health Expenditure per capital vs Mortality rate, infant";
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
 	public HealthMortalityAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults HealthExpend= Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
 		ReaderResults Mortality = Reader.RequestData(MortalityIndicator,params._yearStart,params._yearEnd,params._country); 
