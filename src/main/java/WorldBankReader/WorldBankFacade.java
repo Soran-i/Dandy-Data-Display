@@ -4,7 +4,8 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 /**
- * This class makes a request and requests the data
+ * This class implements a facade design pattern since it hides the internal requirements of making data requests 
+ * from the API
  * 
  * @author ginaj
  *
@@ -13,20 +14,23 @@ public class WorldBankFacade {
 	private WorldBankFetcher fetcher;
 	private WorldBankDataParser parser;
 
-	// Constructor of the class
+	/**
+	 * A constructor for creating a world bank data fetcher and a world bank data parser to fetch the data and parse the json
+	 * and create a reader results object
+	 */
 	public WorldBankFacade() {
 		fetcher = new WorldBankFetcher();
 		parser = new WorldBankDataParser();
 	}
 
 	/**
-	 * This method requests the data of start year, end year, indicator, and country
+	 * This method requests the data of start year, end year, indicator, and country from the Worldbank API
 	 * 
-	 * @param startYear
-	 * @param endYear
-	 * @param indicator
-	 * @param country
-	 * @throws Exception 
+	 * @param startYear the start year for the api request
+	 * @param endYear the end year for the api request
+	 * @param indicator the data indicator for the api request
+	 * @param country the country symbol for the API request
+	 * @throws Exception an exception thrown when the data cannot be requested
 	 */
 	public ReaderResults RequestData(String indicator, String startYear, String endYear, String country) throws Exception {
 		
@@ -35,15 +39,6 @@ public class WorldBankFacade {
 		return Res;
 	}
 
-	/**
-	 * This method makes a request of the data from fetcher and parser.
-	 * 
-	 * @param startYear
-	 * @param endYear
-	 * @param indicator
-	 * @param country
-	 * @throws Exception 
-	 */
 	
 //	public static void main(String[] args)
 //	{

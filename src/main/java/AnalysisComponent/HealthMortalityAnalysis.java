@@ -4,13 +4,18 @@ import java.util.*;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 
-
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches health expenditure per capita and the indant mortality rate and returns a results structure
+ * @author stephan
+ *
+ */
 public class HealthMortalityAnalysis extends Analysis {
 	private String  HealthExpendIndicator = "SH.XPD.CHEX.PC.CD";
 	private String  MortalityIndicator = "SP.DYN.IMRT.IN";
 	
-	private String  HealthExpendLabel = "C02 emissions";
-	private String  MortalityLabel = "Energy Use";
+	private String  HealthExpendLabel = "Health Expenditure per cap";
+	private String  MortalityLabel = "Mortality Rate, Infant";
 	
 	private String  HealthExpendUnits = "US$";
 	private String  MortalityUnits = "1/1000 live births";
@@ -19,10 +24,20 @@ public class HealthMortalityAnalysis extends Analysis {
 	
 	private WorldBankFacade Reader; 
 	
+	/**
+	 * A constructor for the analysis to create a reader object
+	 */
 	public HealthMortalityAnalysis(){
 		Reader = new WorldBankFacade(); 
 	}
 	
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Fetches health expenditure per capita and the indant mortality rate and returns a results structure
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
 	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults HealthExpend= Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 

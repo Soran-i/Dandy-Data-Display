@@ -4,7 +4,12 @@ import java.util.*;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 
-
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches the C02 Emissions data, Energy use data and Air Pollution data with no calculations
+ * @author stephan
+ *
+ */
 public class CO2EnergyPolnAnalysis extends Analysis {
 	private String  C02EmissionIndicator = "EN.ATM.CO2E.PC";
 	private String  EnergyUseIndicator = "EG.USE.PCAP.KG.OE";
@@ -26,6 +31,13 @@ public class CO2EnergyPolnAnalysis extends Analysis {
 		Reader = new WorldBankFacade(); 
 	}
 	
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Requests the C02 Emissions data, Energy Use data and Air Pollution data and forms results structure. 
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
 	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults CO2Emis= Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 

@@ -4,6 +4,12 @@ import java.util.*;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches the C02 Emissions data and GDP data and forms a results structure.
+ * @author stephan
+ *
+ */
 public class C02GDPAnalysis extends Analysis {
 
 	private String  C02EmissionIndicator = "EN.ATM.CO2E.PC";
@@ -17,10 +23,20 @@ public class C02GDPAnalysis extends Analysis {
 	
 	private WorldBankFacade Reader; 
 	
+	/**
+	 * A constructor for the analysis to create a reader object
+	 */
 	public C02GDPAnalysis(){
 		Reader = new WorldBankFacade(); 
 	}
 	
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Requests the C02 Emissions data, Energy Use data and Air Pollution data and forms results structure. 
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
 	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults C02Emissions = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 
@@ -46,6 +62,11 @@ public class C02GDPAnalysis extends Analysis {
 		
 	}
 	
+	/**
+	 * @param Element1 vector of elements to be divided
+	 * @param Element2 vector of elements to divide Element1 by
+	 * @return A vector containing the ratio of Element1/Element2
+	 */
 	private Vector<Double> CalculateRatio(Vector<Double> Element1,Vector<Double>Element2) {
 		Vector<Double> Ratio = new Vector<Double>();
 		

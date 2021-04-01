@@ -24,7 +24,7 @@ public class WorldBankFetcher {
 	// structure - return unit of vector of data, vector of years, object called
 	// readerResult
 	/**
-	 * This method gets the data from the URL string
+	 * This method gets the data from the URL string from the World bank API and stores it internally
 	 * 
 	 * @param startYear
 	 * @param endYear
@@ -37,7 +37,7 @@ public class WorldBankFetcher {
 	}
 
 	/**
-	 * This methods takes the URL and data from it.
+	 * This methods takes the URL and formats the string correctly. 
 	 * 
 	 * @param startYear
 	 * @param endYear
@@ -50,9 +50,8 @@ public class WorldBankFetcher {
 	}
 
 	/**
-	 * This method requests the data
-	 * 
-	 * @return
+	 * This method requests the data from the internally formatted stored and formatted URL
+	 * @return returns a JSON array containing the data from the request. 
 	 */
 	public JsonArray makeRequest() {
 		JsonArray jsonArray = null;

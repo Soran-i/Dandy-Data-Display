@@ -5,6 +5,13 @@ import java.util.*;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 
+
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches the forest Area data and coverts the percentages to decimals before returning the results structure
+ * @author stephan
+ *
+ */
 public class ForestAnalysis extends Analysis {
 	private String  ForestAreaIndicator = "AG.LND.FRST.ZS";
 
@@ -16,10 +23,20 @@ public class ForestAnalysis extends Analysis {
 	
 	private WorldBankFacade Reader; 
 	
+	/**
+	 * A constructor for the analysis to create a reader object
+	 */
 	public ForestAnalysis(){
 		Reader = new WorldBankFacade(); 
 	}
 	
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Requests the forest area data for the requested parameters
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
 	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
@@ -42,6 +59,11 @@ public class ForestAnalysis extends Analysis {
 		
 	}
 	
+	/**
+	 * Method to divide all vector elements by 100 to turn a percentage to a decimal
+	 * @param Element1 a vector of percentages
+	 * @return a vector of decimals that were percentages
+	 */
 	private Vector<Double> DivBy100(Vector<Double> Element1) {
 		Vector<Double> Ratio = new Vector<Double>();
 		

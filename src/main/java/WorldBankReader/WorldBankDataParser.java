@@ -7,18 +7,24 @@ import com.google.gson.JsonArray;
 
 
 /**
- * This class is a parser to display the data
- * 
+ * This class is a parser to fetch parse the returned JSON file from the WorldBank api
  * @author ginaj
  *
  */
 public class WorldBankDataParser {
 
-	// constructor
+	/**
+	 * constructor for the parser
+	 */
 	public WorldBankDataParser() {
 
 	}
 
+	/**
+	 * Method used by the World Bank Facade to parse the Json return
+	 * @param jsonArray a vector of percentages
+	 * @return a reader results structure carrying the data from the data fetching
+	 */
 	public ReaderResults parserJson(JsonArray jsonArray) throws Exception {
 		int sizeOfResults = jsonArray.get(1).getAsJsonArray().size();
 		Vector<Double> DataVect = new Vector<Double>(); 
@@ -59,6 +65,11 @@ public class WorldBankDataParser {
 		
 	}
 	
+	/**
+	 * Method used to check if all the data int he parameter is entirely null
+	 * @param Data a vector of percentages
+	 * @return a boolean return variable indicating if the data is all null or not
+	 */
 	private boolean checkIfAllNull(Vector<Double> Data) {
 		Iterator<Double> value = Data.iterator();
 		while (value.hasNext()) {
@@ -71,6 +82,9 @@ public class WorldBankDataParser {
 		
 	}
 	
+	/**
+	 * a method for throwing an exception indicating invalid year selection
+	 */
 	private void ThrowNoDataException() throws Exception {
 		throw new Exception("Not Valid Year Selection");
 	}
