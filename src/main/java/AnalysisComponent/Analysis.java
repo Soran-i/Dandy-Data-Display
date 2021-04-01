@@ -8,9 +8,9 @@ import java.util.*;
  * @author stephan
  *
  */
-abstract class Analysis {
+public abstract class Analysis {
 	public abstract ResultsStruct performAnalysis(ParamStruct params) throws Exception; 
-	
+
 	
 //	public static void main(String[] args)
 //	{

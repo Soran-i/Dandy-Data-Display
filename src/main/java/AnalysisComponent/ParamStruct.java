@@ -9,4 +9,5 @@ public class ParamStruct {
 	public String _yearStart = new String(); 
 	public String _yearEnd = new String();  
 	public String _country = new String();  
+	public String _analysis = new String();
 }
