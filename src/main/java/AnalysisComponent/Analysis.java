@@ -2,7 +2,7 @@ package AnalysisComponent;
 
 import java.util.*;
 
-abstract class Analysis {
+public abstract class Analysis {
 	public abstract ResultsStruct performAnalysis(ParamStruct params); 
 	
 	
