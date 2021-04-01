@@ -43,6 +43,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import selectionModule.InitialConfigFetcher;
+import selectionModule.SelectionHandler;
 
 public class MainUI extends JFrame {
 	/**
@@ -64,6 +65,7 @@ public class MainUI extends JFrame {
 		super("Country Statistics");
 
 		InitialConfigFetcher fetcher = new InitialConfigFetcher();
+		SelectionHandler handler = new SelectionHandler();
 		
 		// Set top bar
 		JLabel chooseCountryLabel = new JLabel("Choose a country: ");
@@ -71,6 +73,13 @@ public class MainUI extends JFrame {
 		
 		countriesNames.sort(null);
 		JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
+		
+        countriesList.addActionListener(new ActionListener(){
+      	   public void actionPerformed(ActionEvent ae){
+      		   
+      	        
+      	   }
+      	});
 
 		JLabel from = new JLabel("From");
 		JLabel to = new JLabel("To");
@@ -103,6 +112,7 @@ public class MainUI extends JFrame {
 
 		
 		JComboBox<String> viewsList = new JComboBox<String>(viewsNames);
+		
 		JButton addView = new JButton("+");
 		JButton removeView = new JButton("-");
 
@@ -110,8 +120,16 @@ public class MainUI extends JFrame {
 
 		Vector<String> methodsNames = fetcher.getAnalysisAvailable();
 
-
+		
 		JComboBox<String> methodsList = new JComboBox<String>(methodsNames);
+		
+        methodsList.addActionListener(new ActionListener(){
+      	   public void actionPerformed(ActionEvent ae){
+      		   clearView();
+      		   
+      		   
+      	   }
+      	});
 
 		JPanel south = new JPanel();
 		south.add(viewsLabel);
@@ -134,6 +152,10 @@ public class MainUI extends JFrame {
 		getContentPane().add(east, BorderLayout.EAST);
 		getContentPane().add(south, BorderLayout.SOUTH);
 		getContentPane().add(west, BorderLayout.WEST);
+	}
+	// TODO Matt clear the view
+	private void clearView() {
+		
 	}
 
 	private void createCharts(JPanel west) {
