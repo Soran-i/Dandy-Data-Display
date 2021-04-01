@@ -1,8 +1,15 @@
 package AnalysisComponent;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches Air Pollution data and forest area data with no calculations. Returns the results structure. 
+ * @author stephan
+ *
+ */
 public class PolnForestAnalysis extends Analysis {
 	private String  AirPolnIndicator = "EN.ATM.PM25.MC.M3";
 	private String  ForestAreaIndicator = "AG.LND.FRST.ZS";
@@ -13,25 +20,34 @@ public class PolnForestAnalysis extends Analysis {
 	private String  AirPolnUnits = "micrograms/m^3";
 	private String  ForestAreaUnits = "%";
 	
-	private String Title = " PM2.5 air Pollution vs Forest Area"; 
+	private String Title = "PM2.5 air Pollution vs Forest Area"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
+	/**
+	 * A constructor for the analysis to create a reader object
+	 */
 	public PolnForestAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
-		
-		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Fetches Air Pollution data and forest area data with no calculations. Returns the results structure. 
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		ReaderResults AirPoln = Reader.RequestData(AirPolnIndicator,params._yearStart,params._yearEnd,params._country); 
+		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
 
-		Vector<Double> ForestAreaData = ForestArea.NumericData;
 		Vector<Double> AirPolnsData = AirPoln.NumericData;
-		
+		Vector<Double> ForestAreaData = ForestArea.NumericData;
+
 		ResultsStruct ResultReturn = new ResultsStruct();
-		ResultReturn.Results.add(ForestAreaData);
-		ResultReturn.Results.add(AirPolnsData); 
+		ResultReturn.Results.add(AirPolnsData);
+		ResultReturn.Results.add(ForestAreaData); 
 		
 		ResultReturn.Years = ForestArea.Years;
 		

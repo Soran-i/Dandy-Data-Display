@@ -1,8 +1,17 @@
 package AnalysisComponent;
+import java.text.DecimalFormat;
 import java.util.*;
 
-import WorldBankReader.WorldBankFacadeMocked;
+import WorldBankReader.ReaderResults;
+import WorldBankReader.WorldBankFacade;
 
+
+/**
+ * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
+ * Fetches the forest Area data and coverts the percentages to decimals before returning the results structure
+ * @author stephan
+ *
+ */
 public class ForestAnalysis extends Analysis {
 	private String  ForestAreaIndicator = "AG.LND.FRST.ZS";
 
@@ -12,17 +21,28 @@ public class ForestAnalysis extends Analysis {
 	
 	private String Title = "Average Forest Area (% of land area)"; 
 	
-	private WorldBankFacadeMocked Reader; 
+	private WorldBankFacade Reader; 
 	
+	/**
+	 * A constructor for the analysis to create a reader object
+	 */
 	public ForestAnalysis(){
-		Reader = new WorldBankFacadeMocked(); 
+		Reader = new WorldBankFacade(); 
 	}
 	
-	public ResultsStruct performAnalysis(ParamStruct params) {
+	/**
+	 * Implements the performAnalysis method from the abstract class. 
+	 * Requests the forest area data for the requested parameters
+	 * Also populates the labels, units and title required for the analysis. 
+	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
+	 *@return A results structure containing the results of the analyses
+	 */
+	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
 		
 		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
 
 		Vector<Double> ForestAreaData = ForestArea.NumericData;
+		ForestAreaData = DivBy100(ForestAreaData);
 		
 		ResultsStruct ResultReturn = new ResultsStruct();
 		ResultReturn.Results.add(ForestAreaData);
@@ -38,4 +58,23 @@ public class ForestAnalysis extends Analysis {
 		return ResultReturn; 
 		
 	}
+	
+	/**
+	 * Method to divide all vector elements by 100 to turn a percentage to a decimal
+	 * @param Element1 a vector of percentages
+	 * @return a vector of decimals that were percentages
+	 */
+	private Vector<Double> DivBy100(Vector<Double> Element1) {
+		Vector<Double> Ratio = new Vector<Double>();
+		
+		DecimalFormat df = new DecimalFormat("#.#######");
+		
+		for(int i = 0; i < Element1.size(); i++)
+		{
+			Ratio.add(Double.valueOf(df.format(Element1.get(i)/100.)));
+		}
+		
+		return Ratio; 
+	}
+
 } 
