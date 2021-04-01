@@ -1,62 +1,44 @@
 package viewer;
 
-import java.util.*;
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.block.BlockBorder;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYSplineRenderer;
-import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.util.TableOrder;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.data.time.Year;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import AnalysisComponent.*;
+import model.*;
 
+/**
+* This class is an concrete observer which, when attached to an AnalysisSubject, can display 
+* the subject results on a text report. 
+*
+* @author	Matthew Da Silva
+*/
 public class TextReport extends Viewer {
-	private model.AnalysisSubject _subject;
+	private AnalysisSubject _subject;
 	private ResultsStruct _results;
 	private JScrollPane _scrollPane;
 	
+	/**
+	* This constructor creates an empty TextReport object (no related Analysis)
+	*/
 	public TextReport() { }
 	
-	public TextReport(model.AnalysisSubject subject) {
+	/**
+	* This constructor creates a TextReport object and connects it to the provided subject.
+	* 
+	* @param subject An AnalysisSubject which holds the results to be displayed
+	*/
+	public TextReport(AnalysisSubject subject) {
 		_subject = subject;
 	}
 	
+	/**
+	* This method updates the TextReport's local representation of the connected AnalysisSubject's 
+	* results and creates a text report with these results
+	*/
 	public void update() {
 		_results = _subject.getResults();
 		
@@ -80,11 +62,22 @@ public class TextReport extends Viewer {
 		_scrollPane.setPreferredSize(new Dimension(400, 300));
 	}
 	
+	/**
+	* This method gets the text report JScrollPane created during the update() function.
+	* 
+	* @return A JScrollPane that contains the text report
+	*/
 	public JScrollPane getChart() {
 		return _scrollPane;
 	}
 	
-	public void setSubject(model.AnalysisSubject subject) {
+	/**
+	* This method sets the subject of the TextReport object so that it can obtain the subject results 
+	* in the update() function.
+	* 
+	* @param subject An AnalysisSubject which holds the results to be displayed
+	*/
+	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
 	}
 }

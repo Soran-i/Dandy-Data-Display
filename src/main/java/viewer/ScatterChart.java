@@ -1,62 +1,54 @@
 package viewer;
 
-import java.util.*;
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.block.BlockBorder;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.XYSplineRenderer;
-import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.util.TableOrder;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Year;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
+import AnalysisComponent.*;
+import model.*;
+
+/**
+* This class is an concrete observer which, when attached to an AnalysisSubject, can display 
+* the subject results on a scatter chart. 
+*
+* @author	Matthew Da Silva
+*/
 public class ScatterChart extends Viewer {
-	private model.AnalysisSubject _subject;
+	private AnalysisSubject _subject;
 	private ResultsStruct _results;
 	private ChartPanel _chartPanel;
 	
+	/**
+	* This constructor creates an empty ScatterChart object (no related Analysis)
+	*/
 	public ScatterChart() { }
 	
-	public ScatterChart(model.AnalysisSubject subject) {
+	/**
+	* This constructor creates a ScatterChart object and connects it to the provided subject.
+	* 
+	* @param subject An AnalysisSubject which holds the results to be displayed
+	*/
+	public ScatterChart(AnalysisSubject subject) {
 		_subject = subject;
 	}
 	
+	/**
+	* This method updates the ScatterChart's local representation of the connected AnalysisSubject's 
+	* results and creates a scatter chart with these results
+	*/
 	public void update() {
 		_results = _subject.getResults();
 		
@@ -82,7 +74,7 @@ public class ScatterChart extends Viewer {
 		DateAxis domainAxis = new DateAxis("Year");
 		plot.setDomainAxis(domainAxis);
 
-		JFreeChart chart = new JFreeChart("Mortality vs Expenses & Hospital Beds",
+		JFreeChart chart = new JFreeChart(_results.Title,
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
 
 		_chartPanel = new ChartPanel(chart);
@@ -91,11 +83,22 @@ public class ScatterChart extends Viewer {
 		_chartPanel.setBackground(Color.white);
 	}
 	
+	/**
+	* This method gets the scatter chart ChartPanel created during the update() function.
+	* 
+	* @return A ChartPanel that contains the scatter chart
+	*/
 	public ChartPanel getChart() {
 		return _chartPanel;
 	}
 	
-	public void setSubject(model.AnalysisSubject subject) {
+	/**
+	* This method sets the subject of the ScatterChart object so that it can obtain the subject results 
+	* in the update() function.
+	* 
+	* @param subject An AnalysisSubject which holds the results to be displayed
+	*/
+	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
 	}
 }
