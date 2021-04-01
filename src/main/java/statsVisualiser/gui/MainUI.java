@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -40,6 +42,8 @@ import org.jfree.data.time.Year;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import selectionModule.InitialConfigFetcher;
+
 public class MainUI extends JFrame {
 	/**
 	 * 
@@ -59,23 +63,19 @@ public class MainUI extends JFrame {
 		// Set window title
 		super("Country Statistics");
 
+		InitialConfigFetcher fetcher = new InitialConfigFetcher();
+		
 		// Set top bar
 		JLabel chooseCountryLabel = new JLabel("Choose a country: ");
-		Vector<String> countriesNames = new Vector<String>();
-		countriesNames.add("USA");
-		countriesNames.add("Canada");
-		countriesNames.add("France");
-		countriesNames.add("China");
-		countriesNames.add("Brazil");
+		Vector<String> countriesNames = fetcher.getCountriesAvailable();
+		
 		countriesNames.sort(null);
 		JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
 
 		JLabel from = new JLabel("From");
 		JLabel to = new JLabel("To");
-		Vector<String> years = new Vector<String>();
-		for (int i = 2021; i >= 2010; i--) {
-			years.add("" + i);
-		}
+		Vector<String> years = fetcher.getYearsAvailable();
+
 		JComboBox<String> fromList = new JComboBox<String>(years);
 		JComboBox<String> toList = new JComboBox<String>(years);
 
@@ -89,28 +89,27 @@ public class MainUI extends JFrame {
 
 		// Set bottom bar
 		JButton recalculate = new JButton("Recalculate");
+		
+        recalculate.addActionListener(new ActionListener(){
+     	   public void actionPerformed(ActionEvent ae){
+     	      //TODO Matt do this
+     	        
+     	   }
+     	});
 
 		JLabel viewsLabel = new JLabel("Available Views: ");
 
-		Vector<String> viewsNames = new Vector<String>();
-		viewsNames.add("Pie Chart");
-		viewsNames.add("Line Chart");
-		viewsNames.add("Bar Chart");
-		viewsNames.add("Scatter Chart");
-		viewsNames.add("Report");
+		Vector<String> viewsNames = fetcher.getViewersAvailable();
+
+		
 		JComboBox<String> viewsList = new JComboBox<String>(viewsNames);
 		JButton addView = new JButton("+");
 		JButton removeView = new JButton("-");
 
 		JLabel methodLabel = new JLabel("        Choose analysis method: ");
 
-		Vector<String> methodsNames = new Vector<String>();
-		methodsNames.add("Mortality");
-		methodsNames.add("Mortality vs Expenses");
-		methodsNames.add("Mortality vs Expenses & Hospital Beds");
-		methodsNames.add("Mortality vs GDP");
-		methodsNames.add("Unemployment vs GDP");
-		methodsNames.add("Unemployment");
+		Vector<String> methodsNames = fetcher.getAnalysisAvailable();
+
 
 		JComboBox<String> methodsList = new JComboBox<String>(methodsNames);
 

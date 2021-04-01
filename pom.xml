@@ -5,6 +5,14 @@
 	<groupId>httpTest</groupId>
 	<artifactId>httpTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>userinfo.json</directory>
+			</resource>
+		</resources>
+	</build>
 
 	<repositories>
 		<repository>
