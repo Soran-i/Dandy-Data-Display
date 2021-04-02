@@ -40,6 +40,7 @@ public class BarChart extends Viewer {
 	*/
 	public BarChart(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -95,5 +96,6 @@ public class BarChart extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

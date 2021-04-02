@@ -1,8 +1,8 @@
-Emissions vs Energy vs Pollution:can
+Emissions vs Energy vs Pollution:none
 Pollution vs Forest:none
 C02 vs GDP:none
 Forest:none
-Education Expend:none
+Education Expend:canada
 Hospital Beds vs Health Expend:none
 Health Expend vs Mortality:none
 Education Expend vs Health Expend:none

@@ -3,6 +3,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -38,10 +40,16 @@ public class HealthMortalityAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
-		ReaderResults HealthExpend= Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults Mortality = Reader.RequestData(MortalityIndicator,params._yearStart,params._yearEnd,params._country); 
+		ReaderResults HealthExpend = new ReaderResults();
+		ReaderResults Mortality = new ReaderResults();
+		try {
+			HealthExpend= Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
+			Mortality = Reader.RequestData(MortalityIndicator,params._yearStart,params._yearEnd,params._country); 
+		} catch (ReaderException e) {
+			throw e;
+		} 
 		
 		Vector<Double> HealthExpendData = HealthExpend.NumericData; 
 		Vector<Double> MortalityData = Mortality.NumericData;

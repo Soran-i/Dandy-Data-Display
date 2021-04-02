@@ -14,10 +14,10 @@ public class ConfigDatabaseReader {
 
 	
 	public ConfigDatabaseReader(){
-		AnalysisViewersPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/AnalysisViewerConfig.txt";
-		AnalysisCountriesPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/AnalysisCountriesConfig.txt";
-		InitialConfigPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/InitialConfig.txt";
-		CountryLookupPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/countrylookup.txt";
+		AnalysisViewersPath = "AnalysisViewerConfig.txt";
+		AnalysisCountriesPath = "AnalysisCountriesConfig.txt";
+		InitialConfigPath = "InitialConfig.txt";
+		CountryLookupPath = "countrylookup.txt";
         //System.out.println(AnalysisViewersPath);
         //System.out.println(AnalysisCountriesPath);
 	}

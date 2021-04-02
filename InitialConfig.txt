@@ -1,4 +1,4 @@
 Analyses:Emissions vs Energy vs Pollution,Pollution vs Forest,C02 vs GDP,Forest,Education Expend,Hospital Beds vs Health Expend,Health Expend vs Mortality,Education Expend vs Health Expend
 Countries:Canada,United Kingdom,France,USA,Japan,Brazil
-Years:1962,2019
-Viewers:line,bar,pie,scatter,text
+Years:1971,2019
+Viewers:Line Chart,Bar Chart,Pie Chart,Scatter Chart,Text Report

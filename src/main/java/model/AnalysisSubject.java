@@ -3,6 +3,8 @@ package model;
 import java.util.Vector;
 
 import AnalysisComponent.*;
+import statsVisualiser.gui.ReaderException;
+import statsVisualiser.gui.ParamStruct;
 
 
 /**
@@ -23,58 +25,7 @@ public class AnalysisSubject extends ViewerSubject {
 	/**
 	* This constructor creates an empty AnalysisSubject object (no related Analysis)
 	*/
-	public AnalysisSubject() {
-		_results = new ResultsStruct();
-		Vector<Double> temp = new Vector<Double>();
-		temp.add(6.4);
-		temp.add(6.2);
-		temp.add(6.1);
-		temp.add(6.0);
-		temp.add(5.9);
-		temp.add(5.8);
-		temp.add(5.8);
-		temp.add(5.7);
-		temp.add(5.6);
-		_results.Results.add(temp);
-		temp = new Vector<Double>();
-		temp.add(7930.0);
-		temp.add(8130.0);
-		temp.add(8399.0);
-		temp.add(8599.0);
-		temp.add(9023.0);
-		temp.add(9491.0);
-		temp.add(9877.0);
-		temp.add(10209.0);
-		temp.add(10624.0);
-		_results.Results.add(temp);
-		temp = new Vector<Double>();
-		temp.add(3.05);
-		temp.add(2.97);
-		temp.add(2.93);
-		temp.add(2.89);
-		temp.add(2.83);
-		temp.add(2.8);
-		temp.add(2.77);
-		temp.add(2.87);
-		temp.add(2.92);
-		_results.Results.add(temp);
-		
-		for(int i = 2010; i <= 2018; i++) {
-			_results.Years.add(i);
-		}
-		
-		_results.Labels.add("Mortality/1000 births");
-		_results.Labels.add("Health Expenditure per Capita");
-		_results.Labels.add("Hospital Beds/1000 people");
-		
-		_results.Units.add("");
-		_results.Units.add("US$");
-		_results.Units.add("");
-		
-		_results.Title = "Mortality vs Expenses & Hospital Beds";
-		
-		notify_viewers();
-	}
+	public AnalysisSubject() {	}
 	
 	/**
 	* This constructor creates an AnalysisSubject with a defined analysis. 
@@ -82,9 +33,15 @@ public class AnalysisSubject extends ViewerSubject {
 	* 
 	* @param params A ParamStruct which contains all of the desired parameters for the Analysis
 	*/
-	public AnalysisSubject(ParamStruct params) {
+	public AnalysisSubject(ParamStruct params) throws ReaderException {
 		setParams(params);
-		//_results = _analysis.performAnalysis(_params);
+		
+		try {
+			_results = _analysis.performAnalysis(_params);
+		} catch (ReaderException e) {
+			throw(e);
+		}
+		
 		notify_viewers();
 	}
 	
@@ -99,28 +56,28 @@ public class AnalysisSubject extends ViewerSubject {
 	public void setParams(ParamStruct params) {
 		_params = params;
 		
-		if(params._analysis == "Emissions vs Energy vs Pollution") {
+		if(params._analysis.equals("Emissions vs Energy vs Pollution")) {
 			_analysis = new CO2EnergyPolnAnalysis();
 		}
-		else if(params._analysis == "Pollution vs Forest") {
+		else if(params._analysis.equals("Pollution vs Forest")) {
 			_analysis = new PolnForestAnalysis();
 		}
-		else if(params._analysis == "C02 vs GDP") {
+		else if(params._analysis.equals("C02 vs GDP")) {
 			_analysis = new C02GDPAnalysis();
 		}
-		else if(params._analysis == "Forest") {
+		else if(params._analysis.equals("Forest")) {
 			_analysis = new ForestAnalysis();
 		}
-		else if(params._analysis == "Education Expend") {
+		else if(params._analysis.equals("Education Expend")) {
 			_analysis = new EducationAnalysis();
 		}
-		else if(params._analysis == "Hospital Beds vs Health Expend") {
+		else if(params._analysis.equals("Hospital Beds vs Health Expend")) {
 			_analysis = new HospitalAnalysis();
 		}
-		else if(params._analysis == "Health Expend vs Mortality") {
+		else if(params._analysis.equals("Health Expend vs Mortality")) {
 			_analysis = new HealthMortalityAnalysis();
 		}
-		else if(params._analysis == "Education Expend vs Health Expend") {
+		else if(params._analysis.equals("Education Expend vs Health Expend")) {
 			_analysis = new EducationHealthAnalysis();
 		}
 		else {
@@ -131,9 +88,15 @@ public class AnalysisSubject extends ViewerSubject {
 	/**
 	* This method performs the currently stored analysis and updates the results and attached viewers.
 	*/
-	public void recalculate() {
+	public void recalculate() throws ReaderException {
 		if(_analysis != null) {
-			//_results = _analysis.performAnalysis(_params);
+			
+			try {
+				_results = _analysis.performAnalysis(_params);
+			} catch (ReaderException e) {
+				throw(e);
+			}
+			
 			notify_viewers();
 		}
 	}

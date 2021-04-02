@@ -1,0 +1,8 @@
+Emissions vs Energy vs Pollution:Pie Chart
+Pollution vs Forest:Pie Chart
+C02 vs GDP:Pie Chart
+Forest:none
+Education Expend:none
+Hospital Beds vs Health Expend:Pie Chart
+Health Expend vs Mortality:Pie Chart
+Education Expend vs Health Expend:Pie Chart 

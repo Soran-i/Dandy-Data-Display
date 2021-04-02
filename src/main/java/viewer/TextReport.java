@@ -33,6 +33,7 @@ public class TextReport extends Viewer {
 	*/
 	public TextReport(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -79,5 +80,6 @@ public class TextReport extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

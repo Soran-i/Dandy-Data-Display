@@ -5,6 +5,8 @@ import java.util.*;
 
 import com.google.gson.JsonArray;
 
+import statsVisualiser.gui.ReaderException;
+
 
 /**
  * This class is a parser to fetch parse the returned JSON file from the WorldBank api
@@ -85,8 +87,8 @@ public class WorldBankDataParser {
 	/**
 	 * a method for throwing an exception indicating invalid year selection
 	 */
-	private void ThrowNoDataException() throws Exception {
-		throw new Exception("Not Valid Year Selection");
+	private void ThrowNoDataException() throws ReaderException {
+		throw new ReaderException("Not Valid Year Selection");
 	}
 
 		

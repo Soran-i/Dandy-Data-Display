@@ -3,6 +3,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -38,11 +40,17 @@ public class CO2EnergyPolnAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
-		
-		ReaderResults CO2Emis= Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults EnergyUse = Reader.RequestData(EnergyUseIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults AirPoln = Reader.RequestData(AirPolnIndicator,params._yearStart,params._yearEnd,params._country);
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
+		ReaderResults CO2Emis = new ReaderResults();
+		ReaderResults EnergyUse = new ReaderResults();
+		ReaderResults AirPoln = new ReaderResults();
+		try {
+			CO2Emis = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country);
+			EnergyUse = Reader.RequestData(EnergyUseIndicator,params._yearStart,params._yearEnd,params._country); 
+			AirPoln = Reader.RequestData(AirPolnIndicator,params._yearStart,params._yearEnd,params._country);
+		} catch (ReaderException e) {
+			throw e;
+		} 
 		
 		Vector<Double> C02EmisData = CO2Emis.NumericData; 
 		Vector<Double> EnergyUseData = EnergyUse.NumericData;

@@ -2,6 +2,9 @@ package AnalysisComponent;
 
 import java.util.*;
 
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
+
 /**
  * This is the abstract class defining the method perform Analysis that are implemented in the concrete Analyses. 
  * This class is part of the strategy design pattern that provides the interface for use of concrete strategies.
@@ -9,7 +12,7 @@ import java.util.*;
  *
  */
 public abstract class Analysis {
-	public abstract ResultsStruct performAnalysis(ParamStruct params) throws Exception; 
+	public abstract ResultsStruct performAnalysis(ParamStruct params) throws ReaderException; 
 
 	
 //	public static void main(String[] args)

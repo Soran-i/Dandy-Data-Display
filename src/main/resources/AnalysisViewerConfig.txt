@@ -1,8 +1,0 @@
-Emissions vs Energy vs Pollution:pie
-Pollution vs Forest:pie
-C02 vs GDP: pie
-Forest:none
-Education Expend:none
-Hospital Beds vs Health Expend:pie
-Health Expend vs Mortality: pie
-Education Expend vs Health Expend:pie 

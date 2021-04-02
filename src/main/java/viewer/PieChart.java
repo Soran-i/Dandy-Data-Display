@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 
@@ -43,6 +42,7 @@ public class PieChart extends Viewer {
 	*/
 	public PieChart(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -50,22 +50,7 @@ public class PieChart extends Viewer {
 	* results and creates a pie chart with these results
 	*/
 	public void update() {
-		//_results = _subject.getResults();
-		_results = new ResultsStruct();
-		Vector<Double> temp = new Vector<Double>();
-		temp.add(0.3946);
-		temp.add(0.26054);
-		temp.add(0.53837);
-		temp.add(0.76163);
-		_results.Results.add(temp);
-		_results.Years.add(2016);
-		_results.Years.add(2017);
-		_results.Years.add(2018);
-		_results.Years.add(2019);
-		_results.Labels.add("Forest Area");
-		_results.Units.add("%");
-		_results.Title = "Forest Area (% Land of Area)";
-		
+		_results = _subject.getResults();
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		for(int i = 0; i <= _results.Results.size() - 1; i++) {
@@ -114,5 +99,6 @@ public class PieChart extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

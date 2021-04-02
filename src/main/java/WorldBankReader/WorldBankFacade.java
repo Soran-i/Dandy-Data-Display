@@ -3,6 +3,8 @@ package WorldBankReader;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import statsVisualiser.gui.ReaderException;
+
 /**
  * This class implements a facade design pattern since it hides the internal requirements of making data requests 
  * from the API
@@ -32,10 +34,16 @@ public class WorldBankFacade {
 	 * @param country the country symbol for the API request
 	 * @throws Exception an exception thrown when the data cannot be requested
 	 */
-	public ReaderResults RequestData(String indicator, String startYear, String endYear, String country) throws Exception {
+	public ReaderResults RequestData(String indicator, String startYear, String endYear, String country) throws ReaderException {
 		
 		fetcher.getData(startYear, endYear, indicator, country);
-		ReaderResults Res = parser.parserJson(fetcher.makeRequest());
+		ReaderResults Res = new ReaderResults();
+		try {
+			Res = parser.parserJson(fetcher.makeRequest());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+		}
 		return Res;
 	}
 

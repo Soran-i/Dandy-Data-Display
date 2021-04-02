@@ -4,6 +4,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 
 /**
@@ -37,9 +39,14 @@ public class ForestAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
-		ReaderResults ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country); 
+		ReaderResults ForestArea = new ReaderResults();
+		try {
+			ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country);
+		} catch (ReaderException e) {
+			throw e;
+		} 
 
 		Vector<Double> ForestAreaData = ForestArea.NumericData;
 		ForestAreaData = DivBy100(ForestAreaData);

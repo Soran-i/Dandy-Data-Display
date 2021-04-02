@@ -4,6 +4,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -37,10 +39,16 @@ public class HospitalAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
-		ReaderResults HospitalBeds = Reader.RequestData(HospitalBedsIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults HealthExpend = Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
+		ReaderResults HospitalBeds = new ReaderResults();
+		ReaderResults HealthExpend = new ReaderResults();
+		try {
+			HospitalBeds= Reader.RequestData(HospitalBedsIndicator,params._yearStart,params._yearEnd,params._country); 
+			HealthExpend = Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
+		} catch (ReaderException e) {
+			throw e;
+		} 
 
 		Vector<Double> HospitalBedsData = HospitalBeds.NumericData;
 		Vector<Double> HealthExpendData = HealthExpend.NumericData;

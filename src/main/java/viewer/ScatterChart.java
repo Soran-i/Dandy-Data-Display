@@ -43,6 +43,7 @@ public class ScatterChart extends Viewer {
 	*/
 	public ScatterChart(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -100,5 +101,6 @@ public class ScatterChart extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }
