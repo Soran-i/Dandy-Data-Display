@@ -42,13 +42,18 @@ public class ForestAnalysis extends Analysis {
 	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
 		ReaderResults ForestArea = new ReaderResults();
-		try {
+		//try {
 			ForestArea = Reader.RequestData(ForestAreaIndicator,params._yearStart,params._yearEnd,params._country);
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> ForestAreaData = ForestArea.NumericData;
+		
+		if (Reader.checkIfAllNull(ForestAreaData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
+		
 		ForestAreaData = DivBy100(ForestAreaData);
 		
 		ResultsStruct ResultReturn = new ResultsStruct();
@@ -82,6 +87,6 @@ public class ForestAnalysis extends Analysis {
 		}
 		
 		return Ratio; 
-	}
+	}	
 
 } 

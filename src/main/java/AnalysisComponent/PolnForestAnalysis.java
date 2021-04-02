@@ -50,15 +50,19 @@ public class PolnForestAnalysis extends Analysis {
 
 		ReaderResults AirPoln = new ReaderResults();
 		ReaderResults ForestArea = new ReaderResults();
-		try {
+		//try {
 			AirPoln = Reader.RequestData(AirPolnIndicator, params._yearStart, params._yearEnd, params._country);
 			ForestArea = Reader.RequestData(ForestAreaIndicator, params._yearStart, params._yearEnd, params._country);
-		} catch (ReaderException e) {
-			throw e;
-		}
-
+		//} catch (ReaderException e) {
+		//	throw e;
+		//}
+			
 		Vector<Double> AirPolnsData = AirPoln.NumericData;
 		Vector<Double> ForestAreaData = ForestArea.NumericData;
+		
+		if (Reader.checkIfAllNull(AirPolnsData) && Reader.checkIfAllNull(ForestAreaData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 
 		ResultsStruct ResultReturn = new ResultsStruct();
 		ResultReturn.Results.add(AirPolnsData);
@@ -77,4 +81,6 @@ public class PolnForestAnalysis extends Analysis {
 		return ResultReturn;
 
 	}
+	
+	
 }

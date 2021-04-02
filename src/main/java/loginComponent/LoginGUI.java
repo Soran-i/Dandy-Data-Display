@@ -2,11 +2,13 @@ package loginComponent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -31,7 +33,7 @@ public class LoginGUI extends JFrame {
 	private LoginGUI() {
 		super("Login");
 		
-		final Login login = new LoginProxy("/Users/soranismail/git/Dandy-Data-Display/src/main/resources/userinfo.json");
+		final Login login = new LoginProxy("src/test/resources/userinfo.json");
         final JsonObject user = new JsonObject();
 		
 		loginPanel = new JPanel();
@@ -63,6 +65,7 @@ public class LoginGUI extends JFrame {
         loginPanel.add(loginButton);
         
         
+        final JFrame LoginWindowFrame = this; 
         loginButton.addActionListener(new ActionListener(){
         	   public void actionPerformed(ActionEvent ae){
         	      String textFieldUsername = tfUsername.getText();
@@ -79,10 +82,14 @@ public class LoginGUI extends JFrame {
         	        		frame.setSize(900, 600);
         	        		frame.pack();
         	        		frame.setVisible(true);
+        	        		
+        	        		
+        	        		LoginWindowFrame.dispatchEvent(new WindowEvent(LoginWindowFrame, WindowEvent.WINDOW_CLOSING));
+        	        		
         	        	}
         	        } catch (Exception e) {
         	            // TODO Auto-generated catch block
-        	            e.printStackTrace();
+        	        	JOptionPane.showMessageDialog(null, e,"Error In logging in",JOptionPane.INFORMATION_MESSAGE);
         	        }
         	        
         	   }
@@ -90,11 +97,11 @@ public class LoginGUI extends JFrame {
         
 	}
 	
-    public static void main( String[] args ) {
-    	JFrame frame = LoginGUI.getInstance();
-    	frame.setSize(300, 130);
-    	frame.add(loginPanel);
-    	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    	frame.setVisible(true);
-    }
+//    public static void main( String[] args ) {
+//    	JFrame frame = LoginGUI.getInstance();
+//    	frame.setSize(300, 130);
+//    	frame.add(loginPanel);
+//    	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//    	frame.setVisible(true);
+//    }
 }

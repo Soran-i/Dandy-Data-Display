@@ -44,15 +44,19 @@ public class HealthMortalityAnalysis extends Analysis {
 		
 		ReaderResults HealthExpend = new ReaderResults();
 		ReaderResults Mortality = new ReaderResults();
-		try {
+		//try {
 			HealthExpend= Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
 			Mortality = Reader.RequestData(MortalityIndicator,params._yearStart,params._yearEnd,params._country); 
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 		
 		Vector<Double> HealthExpendData = HealthExpend.NumericData; 
 		Vector<Double> MortalityData = Mortality.NumericData;
+		
+		if (Reader.checkIfAllNull(HealthExpendData) && Reader.checkIfAllNull(MortalityData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		ResultsStruct ResultReturn = new ResultsStruct();
 		ResultReturn.Results.add(HealthExpendData);

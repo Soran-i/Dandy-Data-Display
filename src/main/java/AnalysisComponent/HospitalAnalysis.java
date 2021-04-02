@@ -43,15 +43,19 @@ public class HospitalAnalysis extends Analysis {
 		
 		ReaderResults HospitalBeds = new ReaderResults();
 		ReaderResults HealthExpend = new ReaderResults();
-		try {
+		//try {
 			HospitalBeds= Reader.RequestData(HospitalBedsIndicator,params._yearStart,params._yearEnd,params._country); 
 			HealthExpend = Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> HospitalBedsData = HospitalBeds.NumericData;
 		Vector<Double> HealthExpendData = HealthExpend.NumericData;
+		
+		if (Reader.checkIfAllNull(HealthExpendData) && Reader.checkIfAllNull(HospitalBedsData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		Vector<Double> Ratio = ConvertCalculateRatio(HospitalBedsData,HealthExpendData);
 		

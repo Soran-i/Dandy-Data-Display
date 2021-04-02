@@ -44,17 +44,22 @@ public class CO2EnergyPolnAnalysis extends Analysis {
 		ReaderResults CO2Emis = new ReaderResults();
 		ReaderResults EnergyUse = new ReaderResults();
 		ReaderResults AirPoln = new ReaderResults();
-		try {
+		//try {
 			CO2Emis = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country);
 			EnergyUse = Reader.RequestData(EnergyUseIndicator,params._yearStart,params._yearEnd,params._country); 
 			AirPoln = Reader.RequestData(AirPolnIndicator,params._yearStart,params._yearEnd,params._country);
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
+			
 		
 		Vector<Double> C02EmisData = CO2Emis.NumericData; 
 		Vector<Double> EnergyUseData = EnergyUse.NumericData;
 		Vector<Double> AirPolnsData = AirPoln.NumericData;
+		
+		if (Reader.checkIfAllNull(C02EmisData) && Reader.checkIfAllNull(EnergyUseData) && Reader.checkIfAllNull(AirPolnsData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		//String CO2EmissUnits = CO2Emis.units; 
 		//String EnergyUseUnits =  EnergyUse.units; 

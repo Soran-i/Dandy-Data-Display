@@ -41,13 +41,17 @@ public class EducationAnalysis extends Analysis {
 	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
 		ReaderResults Education = new ReaderResults();
-		try {
+		//try {
 			Education = Reader.RequestData(EducationIndicator,params._yearStart,params._yearEnd,params._country);
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> EducationData = Education.NumericData;
+		
+		if (Reader.checkIfAllNull(EducationData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		EducationData =  DivBy100(EducationData); 
 		
@@ -84,4 +88,5 @@ public class EducationAnalysis extends Analysis {
 		
 		return Ratio; 
 	}
+	
 } 

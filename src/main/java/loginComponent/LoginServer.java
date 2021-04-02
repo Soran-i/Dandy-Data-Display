@@ -23,11 +23,11 @@ public class LoginServer implements Login {
 			throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		JsonParser parser = new JsonParser();
 		JsonArray userinfo = (JsonArray) parser.parse(new FileReader(userInfoFile));
-		System.out.println(userinfo);
+		//System.out.println(userinfo);
 
 		for (Object userObj : userinfo) {
 			JsonObject userJson = (JsonObject) userObj;
-			System.out.println(userJson.toString());
+			//System.out.println(userJson.toString());
 			if (userCredentials.equals(userJson)) {
 				return true;
 			}

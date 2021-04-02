@@ -1,6 +1,7 @@
 package WorldBankReader;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Vector;
 
 import statsVisualiser.gui.ReaderException;
@@ -42,9 +43,21 @@ public class WorldBankFacade {
 			Res = parser.parserJson(fetcher.makeRequest());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println(e);
+			throw new ReaderException("Database Errors");
 		}
 		return Res;
+	}
+	
+	public boolean checkIfAllNull(Vector<Double> Data) {
+		Iterator<Double> value = Data.iterator();
+		while (value.hasNext()) {
+            if (value.next() != 0.0) {
+            	return false;   //Return false if all values are not false
+            }
+        }
+		
+		return true;  //Returns true if all elements in the check are true. 
+		
 	}
 
 	

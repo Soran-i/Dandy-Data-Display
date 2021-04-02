@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import selectionModule.InitialConfigFetcher;
 import selectionModule.SelectionHandler;
@@ -73,7 +74,7 @@ public class MainUI extends JFrame {
 					_prevCountry = countryName;
 				} catch (CountryAnalysisException e) {
 					countriesList.setSelectedItem(_prevCountry);
-					System.out.println(e);
+					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Country",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -94,7 +95,7 @@ public class MainUI extends JFrame {
 					_prevStartYear = StartYear;
 				} catch (StartYearException e) {
 					fromList.setSelectedItem(_prevStartYear);
-					System.out.println(e);
+					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Start Year",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -112,7 +113,7 @@ public class MainUI extends JFrame {
 					_prevEndYear = EndYear;
 				} catch (EndYearException e) {
 					toList.setSelectedItem(_prevEndYear);
-					System.out.println(e);
+					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of End Year",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -135,7 +136,7 @@ public class MainUI extends JFrame {
 				try {
 					_subject.recalculate();
 				} catch (ReaderException e) {
-					System.out.println(e);
+					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Years",JOptionPane.INFORMATION_MESSAGE);
 				}
 				for(Object index:keySet) {
 					addViewer((String) index);
@@ -158,7 +159,7 @@ public class MainUI extends JFrame {
 					_prevViewer = ViewerSelection;
 				} catch (ViewerAnalysisException e) {
 					viewsList.setSelectedItem(_prevViewer);
-					System.out.println(e);
+					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Viewer",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -205,7 +206,7 @@ public class MainUI extends JFrame {
 		try {
 			_subject = new AnalysisSubject(paramStruct);
 		} catch (ReaderException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e,"Problem Creating Subject",JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		addView.addActionListener(new ActionListener() {
@@ -226,7 +227,7 @@ public class MainUI extends JFrame {
 
 						existingViewers.remove(selection);
 					} else {
-						System.out.println(selection + " isn't being displayed!");
+						JOptionPane.showMessageDialog(null, selection + " isn't being displayed!","Error Removing Viewer",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				if (selection.equals("Line Chart")) {
@@ -237,7 +238,7 @@ public class MainUI extends JFrame {
 
 						existingViewers.remove(selection);
 					} else {
-						System.out.println(selection + " isn't being displayed!");
+						JOptionPane.showMessageDialog(null, selection + " isn't being displayed!","Error Removing Viewer",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				if (selection.equals("Bar Chart")) {
@@ -248,7 +249,7 @@ public class MainUI extends JFrame {
 
 						existingViewers.remove(selection);
 					} else {
-						System.out.println(selection + " isn't being displayed!");
+						JOptionPane.showMessageDialog(null, selection + " isn't being displayed!","Error Removing Viewer",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				if (selection.equals("Scatter Chart")) {
@@ -259,7 +260,7 @@ public class MainUI extends JFrame {
 
 						existingViewers.remove(selection);
 					} else {
-						System.out.println(selection + " isn't being displayed!");
+						JOptionPane.showMessageDialog(null, selection + " isn't being displayed!","Error Removing Viewer",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				if (selection.equals("Text Report")) {
@@ -270,7 +271,7 @@ public class MainUI extends JFrame {
 
 						existingViewers.remove(selection);
 					} else {
-						System.out.println(selection + " isn't being displayed!");
+						JOptionPane.showMessageDialog(null, selection + " isn't being displayed!","Error Removing Viewer",JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				_center.revalidate();
@@ -381,7 +382,7 @@ public class MainUI extends JFrame {
 
 				existingViewers.put(type, pieChart);
 			} else {
-				System.out.println(type + " already exists!");
+				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		}
@@ -393,7 +394,7 @@ public class MainUI extends JFrame {
 
 				existingViewers.put(type, lineChart);
 			} else {
-				System.out.println(type + " already exists!");
+				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		if (type.equals("Bar Chart")) {
@@ -404,7 +405,7 @@ public class MainUI extends JFrame {
 
 				existingViewers.put(type, barChart);
 			} else {
-				System.out.println(type + " already exists!");
+				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		if (type.equals("Scatter Chart")) {
@@ -415,7 +416,7 @@ public class MainUI extends JFrame {
 
 				existingViewers.put(type, scatterChart);
 			} else {
-				System.out.println(type + " already exists!");
+				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		if (type.equals("Text Report")) {
@@ -426,7 +427,7 @@ public class MainUI extends JFrame {
 
 				existingViewers.put(type, textReport);
 			} else {
-				System.out.println(type + " already exists!");
+				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		_center.revalidate();

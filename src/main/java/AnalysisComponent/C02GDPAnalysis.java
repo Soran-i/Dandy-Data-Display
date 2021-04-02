@@ -43,15 +43,19 @@ public class C02GDPAnalysis extends Analysis {
 		
 		ReaderResults C02Emissions = new ReaderResults();
 		ReaderResults GDP = new ReaderResults();
-		try {
+		//try {
 			C02Emissions = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country);
 			GDP = Reader.RequestData(GDPIndicator,params._yearStart,params._yearEnd,params._country); 
-		} catch (ReaderException e) {
-			throw e;
-		} 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> C02EmissionsData = C02Emissions.NumericData;
 		Vector<Double> GDPData = GDP.NumericData;
+		
+		if (Reader.checkIfAllNull(C02EmissionsData) && Reader.checkIfAllNull(C02EmissionsData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		Vector<Double> Ratio = CalculateRatio(C02EmissionsData,GDPData);
 		
@@ -89,5 +93,6 @@ public class C02GDPAnalysis extends Analysis {
 		}
 		
 		return Ratio; 
-	}
+	}	
+	
 } 

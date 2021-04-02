@@ -21,11 +21,12 @@ public class AnalysisSubject extends ViewerSubject {
 	private ResultsStruct _results;
 	private ParamStruct _params;
 	private Analysis _analysis;
+	private AnalysisFactory _analyfactory;
 	
 	/**
 	* This constructor creates an empty AnalysisSubject object (no related Analysis)
 	*/
-	public AnalysisSubject() {	}
+	public AnalysisSubject() {}
 	
 	/**
 	* This constructor creates an AnalysisSubject with a defined analysis. 
@@ -55,34 +56,36 @@ public class AnalysisSubject extends ViewerSubject {
 	*/
 	public void setParams(ParamStruct params) {
 		_params = params;
+		_analyfactory = new AnalysisConcreteFactory(); 
+		_analysis = _analyfactory.GetAnalysis(params);
 		
-		if(params._analysis.equals("Emissions vs Energy vs Pollution")) {
-			_analysis = new CO2EnergyPolnAnalysis();
-		}
-		else if(params._analysis.equals("Pollution vs Forest")) {
-			_analysis = new PolnForestAnalysis();
-		}
-		else if(params._analysis.equals("C02 vs GDP")) {
-			_analysis = new C02GDPAnalysis();
-		}
-		else if(params._analysis.equals("Forest")) {
-			_analysis = new ForestAnalysis();
-		}
-		else if(params._analysis.equals("Education Expend")) {
-			_analysis = new EducationAnalysis();
-		}
-		else if(params._analysis.equals("Hospital Beds vs Health Expend")) {
-			_analysis = new HospitalAnalysis();
-		}
-		else if(params._analysis.equals("Health Expend vs Mortality")) {
-			_analysis = new HealthMortalityAnalysis();
-		}
-		else if(params._analysis.equals("Education Expend vs Health Expend")) {
-			_analysis = new EducationHealthAnalysis();
-		}
-		else {
-			_analysis = new CO2EnergyPolnAnalysis();
-		}
+//		if(params._analysis.equals("Emissions vs Energy vs Pollution")) {
+//			_analysis = new CO2EnergyPolnAnalysis();
+//		}
+//		else if(params._analysis.equals("Pollution vs Forest")) {
+//			_analysis = new PolnForestAnalysis();
+//		}
+//		else if(params._analysis.equals("C02 vs GDP")) {
+//			_analysis = new C02GDPAnalysis();
+//		}
+//		else if(params._analysis.equals("Forest")) {
+//			_analysis = new ForestAnalysis();
+//		}
+//		else if(params._analysis.equals("Education Expend")) {
+//			_analysis = new EducationAnalysis();
+//		}
+//		else if(params._analysis.equals("Hospital Beds vs Health Expend")) {
+//			_analysis = new HospitalAnalysis();
+//		}
+//		else if(params._analysis.equals("Health Expend vs Mortality")) {
+//			_analysis = new HealthMortalityAnalysis();
+//		}
+//		else if(params._analysis.equals("Education Expend vs Health Expend")) {
+//			_analysis = new EducationHealthAnalysis();
+//		}
+//		else {
+//			_analysis = new CO2EnergyPolnAnalysis();
+//		}
 	}
 	
 	/**
@@ -91,11 +94,11 @@ public class AnalysisSubject extends ViewerSubject {
 	public void recalculate() throws ReaderException {
 		if(_analysis != null) {
 			
-			try {
+			//try {
 				_results = _analysis.performAnalysis(_params);
-			} catch (ReaderException e) {
-				throw(e);
-			}
+			//} catch (ReaderException e) {
+			//	throw(e);
+			//}
 			
 			notify_viewers();
 		}

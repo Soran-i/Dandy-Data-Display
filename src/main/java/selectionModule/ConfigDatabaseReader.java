@@ -14,10 +14,10 @@ public class ConfigDatabaseReader {
 
 	
 	public ConfigDatabaseReader(){
-		AnalysisViewersPath = "AnalysisViewerConfig.txt";
-		AnalysisCountriesPath = "AnalysisCountriesConfig.txt";
-		InitialConfigPath = "InitialConfig.txt";
-		CountryLookupPath = "countrylookup.txt";
+		AnalysisViewersPath = "src/test/resources/AnalysisViewerConfig.txt";
+		AnalysisCountriesPath = "src/test/resources/AnalysisCountriesConfig.txt";
+		InitialConfigPath = "src/test/resources/InitialConfig.txt";
+		CountryLookupPath = "src/test/resources/countrylookupConfig.txt";
         //System.out.println(AnalysisViewersPath);
         //System.out.println(AnalysisCountriesPath);
 	}
