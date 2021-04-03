@@ -33,6 +33,7 @@ public class TextReport extends Viewer {
 	*/
 	public TextReport(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -52,7 +53,7 @@ public class TextReport extends Viewer {
 		for(int i = _results.Years.size() - 1; i >= 0; i--) {
 			reportMessage += "Year " + _results.Years.get(i).toString() + ":\n";
 			for(int j = 0; j <= _results.Results.size() - 1; j++) {
-				reportMessage += "\t" + _results.Labels.get(j) + " => " + _results.Results.get(j).get((_results.Years.size() - 1) - i) + "\n";
+				reportMessage += "\t" + _results.Labels.get(j) + " => " + _results.Results.get(j).get(i) + "\n";
 			}
 			reportMessage += "\n";
 		}
@@ -79,5 +80,6 @@ public class TextReport extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

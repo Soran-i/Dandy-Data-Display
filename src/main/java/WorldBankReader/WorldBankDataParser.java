@@ -5,6 +5,8 @@ import java.util.*;
 
 import com.google.gson.JsonArray;
 
+import statsVisualiser.gui.ReaderException;
+
 
 /**
  * This class is a parser to fetch parse the returned JSON file from the WorldBank api
@@ -49,9 +51,9 @@ public class WorldBankDataParser {
 
 		}
 		
-		if(checkIfAllNull(DataVect)) {
-			ThrowNoDataException(); 
-		}
+//		if(checkIfAllNull(DataVect)) {
+//			ThrowNoDataException(); 
+//		}
 		
 		Collections.reverse(DataVect);
 		Collections.reverse(YearVect);
@@ -65,29 +67,29 @@ public class WorldBankDataParser {
 		
 	}
 	
-	/**
-	 * Method used to check if all the data int he parameter is entirely null
-	 * @param Data a vector of percentages
-	 * @return a boolean return variable indicating if the data is all null or not
-	 */
-	private boolean checkIfAllNull(Vector<Double> Data) {
-		Iterator<Double> value = Data.iterator();
-		while (value.hasNext()) {
-            if (value.next() != 0.0) {
-            	return false;   //Return false if all values are not false
-            }
-        }
-		
-		return true;  //Returns true if all elements in the check are true. 
-		
-	}
+//	/**
+//	 * Method used to check if all the data int he parameter is entirely null
+//	 * @param Data a vector of percentages
+//	 * @return a boolean return variable indicating if the data is all null or not
+//	 */
+//	private boolean checkIfAllNull(Vector<Double> Data) {
+//		Iterator<Double> value = Data.iterator();
+//		while (value.hasNext()) {
+//            if (value.next() != 0.0) {
+//            	return false;   //Return false if all values are not false
+//            }
+//        }
+//		
+//		return true;  //Returns true if all elements in the check are true. 
+//		
+//	}
 	
 	/**
 	 * a method for throwing an exception indicating invalid year selection
 	 */
-	private void ThrowNoDataException() throws Exception {
-		throw new Exception("Not Valid Year Selection");
-	}
+//	private void ThrowNoDataException() throws ReaderException {
+//		throw new ReaderException("Not Valid Year Selection");
+//	}
 
 		
 

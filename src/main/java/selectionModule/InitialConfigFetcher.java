@@ -1,6 +1,10 @@
 package selectionModule;
 import java.util.*;
 
+/**
+ * @author steph
+ *
+ */
 public class InitialConfigFetcher {
 	private ConfigDatabaseReader configReader = new ConfigDatabaseReader();
 	Map<String, String> InitialConfigMap = new HashMap<String, String>(); 
@@ -9,25 +13,28 @@ public class InitialConfigFetcher {
 		InitialConfigMap = configReader.ReadIntialConfig(); 
 	}
 	
-	public String[] getAnalysisAvailable() {
-		String YearsString = InitialConfigMap.get("Analyses"); 
-		String[] YearsArray = YearsString.split(",", -1); 
-		return YearsArray; 
+	public Vector<String> getAnalysisAvailable() {
+		String AnalysisString = InitialConfigMap.get("Analyses"); 
+		String[] AnalysisArray = AnalysisString.split(",", -1); 
+		Vector<String> Analysisvector = new Vector<String>(Arrays.asList(AnalysisArray)); 
+		return Analysisvector; 
 	}
 	
-	public String[] getCountriesAvailable() {
+	public Vector<String> getCountriesAvailable() {
 		String CountriesString = InitialConfigMap.get("Countries"); 
 		String[] CountriesArray = CountriesString.split(",", -1); 
-		return CountriesArray; 
+		Vector<String> CountriesVector = new Vector<String>(Arrays.asList(CountriesArray));
+		return CountriesVector; 
 	}
 	
-	public String[] getViewersAvailable() {
+	public Vector<String> getViewersAvailable() {
 		String ViewersString = InitialConfigMap.get("Viewers"); 
 		String[] ViewersArray = ViewersString.split(",", -1); 
-		return ViewersArray; 
+		Vector<String> Viewersvector = new Vector<String>(Arrays.asList(ViewersArray));
+		return Viewersvector; 
 	}
 	
-	public String[] getYearsAvailable() {
+	public Vector<String> getYearsAvailable() {
 		String YearsString = InitialConfigMap.get("Years"); 
 		String[] YearsArray = YearsString.split(",", -1); 
 		
@@ -39,7 +46,8 @@ public class InitialConfigFetcher {
 		{
 			YearsFullArray[i] = Integer.toString(i+start); 
 		} 
-		return YearsFullArray; 
+		Vector<String> yearsFullVector = new Vector<String>(Arrays.asList(YearsFullArray));
+		return yearsFullVector; 
 	}
 	
 //	public static void main(String[] args)

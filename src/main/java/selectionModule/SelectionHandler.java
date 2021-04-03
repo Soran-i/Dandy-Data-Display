@@ -17,6 +17,11 @@ public class SelectionHandler {
 		
 	}
 	
+	public String CountryLookup(String CountryName) {
+		Map<String, String> AnalysisViewerMap = ConfigReader.ReadCountryLookupConfig(); 
+		return AnalysisViewerMap.get(CountryName); 
+	}
+	
 	public boolean CheckAnalysisCountry(String Analysis, String Country) {
 		Map<String, String> AnalysisCountryMap = ConfigReader.ReadAnalysisCountriesConfig(); 
 		
@@ -30,8 +35,7 @@ public class SelectionHandler {
 	}
 	
 	public boolean CheckYears(String StartYr, String EndYr) {
-		
-		if (Integer.parseInt(StartYr) >= Integer.parseInt(EndYr)) {
+		if (Integer.parseInt(StartYr) <= Integer.parseInt(EndYr)) {
 			return true;
 		}else {
 			return false;

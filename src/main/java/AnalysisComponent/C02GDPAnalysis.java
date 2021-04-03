@@ -3,6 +3,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -37,13 +39,23 @@ public class C02GDPAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
-		ReaderResults C02Emissions = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults GDP = Reader.RequestData(GDPIndicator,params._yearStart,params._yearEnd,params._country); 
+		ReaderResults C02Emissions = new ReaderResults();
+		ReaderResults GDP = new ReaderResults();
+		//try {
+			C02Emissions = Reader.RequestData(C02EmissionIndicator,params._yearStart,params._yearEnd,params._country);
+			GDP = Reader.RequestData(GDPIndicator,params._yearStart,params._yearEnd,params._country); 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> C02EmissionsData = C02Emissions.NumericData;
 		Vector<Double> GDPData = GDP.NumericData;
+		
+		if (Reader.checkIfAllNull(C02EmissionsData) && Reader.checkIfAllNull(C02EmissionsData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		Vector<Double> Ratio = CalculateRatio(C02EmissionsData,GDPData);
 		
@@ -81,5 +93,6 @@ public class C02GDPAnalysis extends Analysis {
 		}
 		
 		return Ratio; 
-	}
+	}	
+	
 } 

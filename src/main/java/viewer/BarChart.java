@@ -40,6 +40,7 @@ public class BarChart extends Viewer {
 	*/
 	public BarChart(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class BarChart extends Viewer {
 		CategoryAxis domainAxis = new CategoryAxis("Year");
 		plot.setDomainAxis(domainAxis);
 
-		JFreeChart chart = new JFreeChart("Mortality vs Expenses & Hospital Beds",
+		JFreeChart chart = new JFreeChart(_results.Title,
 				new Font("Serif", java.awt.Font.BOLD, 18), plot, true);
 
 		_chartPanel = new ChartPanel(chart);
@@ -95,5 +96,6 @@ public class BarChart extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

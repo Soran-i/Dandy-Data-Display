@@ -42,6 +42,7 @@ public class LineChart extends Viewer {
 	*/
 	public LineChart(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 	
 	/**
@@ -99,5 +100,6 @@ public class LineChart extends Viewer {
 	*/
 	public void setSubject(AnalysisSubject subject) {
 		_subject = subject;
+		update();
 	}
 }

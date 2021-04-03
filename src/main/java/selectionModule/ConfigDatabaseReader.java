@@ -6,6 +6,12 @@ package selectionModule;
 import java.io.*;
 import java.util.*;
 
+
+/**
+ * Class interfaces with the configuration database and offers back a hash map such that the calling clients can perform look ups with the config files
+ * @author steph
+ * 
+ */
 public class ConfigDatabaseReader {
 	private String AnalysisViewersPath;
 	private String AnalysisCountriesPath;
@@ -13,31 +19,55 @@ public class ConfigDatabaseReader {
 	private String CountryLookupPath;
 
 	
+	/**
+	 * constructor for ConfigDatabaseReader class that sets the paths to find the configuration database text files
+	 */
 	public ConfigDatabaseReader(){
-		AnalysisViewersPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/AnalysisViewerConfig.txt";
-		AnalysisCountriesPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/AnalysisCountriesConfig.txt";
-		InitialConfigPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/InitialConfig.txt";
-		CountryLookupPath = "/Users/soranismail/git/Dandy-Data-Display/src/main/resources/countrylookup.txt";
+		AnalysisViewersPath = "src/test/resources/AnalysisViewerConfig.txt";
+		AnalysisCountriesPath = "src/test/resources/AnalysisCountriesConfig.txt";
+		InitialConfigPath = "src/test/resources/InitialConfig.txt";
+		CountryLookupPath = "src/test/resources/countrylookupConfig.txt";
         //System.out.println(AnalysisViewersPath);
         //System.out.println(AnalysisCountriesPath);
 	}
 	
+	/**
+	 * reads a hashmap from the countryLookupConfig text file that maps the full country names to the standardized ID's to be used in the data requests
+	 * @return a hash map of strings
+	 */
 	public Map<String, String> ReadCountryLookupConfig(){
 		return HashMapFromTextFile(CountryLookupPath);
 	}
 	
+	/**
+	 * reads a hashmap from the AnalysisViewer config which contains all viewers NOT compatible with eac type of analysis
+	 * @return a hash map of strings of that contains all viewers NOT compatible with each analysis
+	 */
 	public Map<String, String> ReadAnalysisViewerConfig(){
 		return HashMapFromTextFile(AnalysisViewersPath);
 	}
 	
+	/**
+	 * reads the AnalysisCountiresConfig file hash map of strings to strings with analyses NOT compatible with each analysis
+	 * @return a hash map of strings to strings with analyses NOT compatible with each analysis
+	 */
 	public Map<String, String> ReadAnalysisCountriesConfig(){
 		return HashMapFromTextFile(AnalysisCountriesPath);
 	}
 	
+	/**
+	 * Reads an InitialConfig hashmap mapping the initial config lists to the initial parameters to populate the lists
+	 * @return a hashmap mapping the initial config lists to the initial parameters to populate the lists
+	 */
 	public Map<String, String> ReadIntialConfig(){
 		return HashMapFromTextFile(InitialConfigPath);
 	}
 
+	/**
+	 * This function reads the text files and returns a hashmap
+	 * @param filePath listing the relative path to the text file
+	 * @return a hashmap from the textfile that is read from filePath
+	 */
 	private static Map<String, String> HashMapFromTextFile(String filePath)
 	{
 	

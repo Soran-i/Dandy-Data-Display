@@ -1,4 +1,4 @@
-package AnalysisComponent;
+package statsVisualiser.gui;
 
 /**
  * A structure to contain the parameters used for use in the analysis

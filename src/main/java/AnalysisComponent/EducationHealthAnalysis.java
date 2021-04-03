@@ -3,6 +3,8 @@ import java.util.*;
 
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
+import statsVisualiser.gui.ParamStruct;
+import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -36,14 +38,23 @@ public class EducationHealthAnalysis extends Analysis {
 	 *@param params a structure of ParamStruct used to pass parameters to this analysis. 
 	 *@return A results structure containing the results of the analyses
 	 */
-	public ResultsStruct performAnalysis(ParamStruct params) throws Exception {
+	public ResultsStruct performAnalysis(ParamStruct params) throws ReaderException {
 		
-		ReaderResults Education = Reader.RequestData(EducationIndicator,params._yearStart,params._yearEnd,params._country); 
-		ReaderResults HealthExpendGDP = Reader.RequestData(HealthExpendGDPIndicator,params._yearStart,params._yearEnd,params._country);  
+		ReaderResults Education = new ReaderResults();
+		ReaderResults HealthExpendGDP = new ReaderResults();
+		//try {
+			Education = Reader.RequestData(EducationIndicator,params._yearStart,params._yearEnd,params._country);
+			HealthExpendGDP = Reader.RequestData(HealthExpendGDPIndicator,params._yearStart,params._yearEnd,params._country); 
+		//} catch (ReaderException e) {
+		//	throw e;
+		//} 
 
 		Vector<Double> EducationData = Education.NumericData;
 		Vector<Double> HealthExpendGDPData = HealthExpendGDP.NumericData;
 
+		if (Reader.checkIfAllNull(EducationData) && Reader.checkIfAllNull(HealthExpendGDPData)) {
+			throw new ReaderException("All elements in analysis are zero");
+		}
 		
 		Vector<Double> Ratio = ConvertCalculateRatio(EducationData,HealthExpendGDPData);
 		
@@ -82,4 +93,5 @@ public class EducationHealthAnalysis extends Analysis {
 		
 		return Ratio; 
 	}
+	
 } 
