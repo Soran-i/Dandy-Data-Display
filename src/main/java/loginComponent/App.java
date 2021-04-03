@@ -4,6 +4,11 @@ import javax.swing.JFrame;
 
 public class App {
 
+	/**
+	 * @author Soran
+	 * The main class creted a login JFrame that is used to start the program
+	 */
+
 	public static void main(String args[]) {
 		
     	JFrame frame = LoginGUI.getInstance();

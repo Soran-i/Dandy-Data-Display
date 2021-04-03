@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Vector;
 
 import AnalysisComponent.*;
 import statsVisualiser.gui.ReaderException;
