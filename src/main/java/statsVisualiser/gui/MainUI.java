@@ -38,6 +38,7 @@ public class MainUI extends JFrame {
 	private String _prevEndYear;
 	private String _prevCountry;
 	private String _prevViewer;
+	private Boolean analysisUpdated = true;
 
 	public static MainUI getInstance() {
 		if (instance == null)
@@ -59,9 +60,8 @@ public class MainUI extends JFrame {
 
 		// Set top bar
 		JLabel chooseCountryLabel = new JLabel("Choose a country: ");
-		Vector<String> countriesNames = fetcher.getCountriesAvailable();
+		final Vector<String> countriesNames = fetcher.getCountriesAvailable();
 		
-		countriesNames.sort(null);
 		final JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
 		_prevCountry = (String) countriesList.getItemAt(0);
 		
@@ -134,6 +134,7 @@ public class MainUI extends JFrame {
 				Object[] keySet = existingViewers.keySet().toArray();
 				clearViewers();
 				try {
+					analysisUpdated = true;
 					_subject.recalculate();
 				} catch (ReaderException e) {
 					JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Years",JOptionPane.INFORMATION_MESSAGE);
@@ -179,9 +180,23 @@ public class MainUI extends JFrame {
 				
 				String analysisID = (String) methodsList.getSelectedItem();
 				if(!analysisID.equals(_prevAnalysis)) {
+					analysisUpdated = false;
 					clearViewers();
 					_prevAnalysis = analysisID;
 					paramStruct._analysis = analysisID;
+					System.out.println(paramStruct._country);
+					String newCountrySelection = revalidateParamSelections(paramStruct, handler, countriesNames);
+					if(newCountrySelection != null) {
+						try {
+							setCountryParam(newCountrySelection, paramStruct, handler);
+							countriesList.setSelectedItem(newCountrySelection);
+						} catch (CountryAnalysisException e) {
+							countriesList.setSelectedItem(_prevCountry);
+							JOptionPane.showMessageDialog(null, e,"Incorrect Choice of Country",JOptionPane.INFORMATION_MESSAGE);
+						}
+						_subject.setParams(paramStruct);
+						_prevCountry = newCountrySelection;
+					}
 					_subject.setParams(paramStruct);
 				}
 			}
@@ -374,64 +389,80 @@ public class MainUI extends JFrame {
 	}
 	
 	private void addViewer(String type) {
-		if (type.equals("Pie Chart")) {
-			if (!existingViewers.containsKey(type)) {
-				PieChart pieChart = new PieChart(_subject);
-				_subject.attach(pieChart);
-				_center.add(pieChart.getChart());
-
-				existingViewers.put(type, pieChart);
-			} else {
-				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+		if(analysisUpdated) {
+			if (type.equals("Pie Chart")) {
+				if (!existingViewers.containsKey(type)) {
+					PieChart pieChart = new PieChart(_subject);
+					_subject.attach(pieChart);
+					_center.add(pieChart.getChart());
+	
+					existingViewers.put(type, pieChart);
+				} else {
+					JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+				}
+	
 			}
-
+			if (type.equals("Line Chart")) {
+				if (!existingViewers.containsKey(type)) {
+					LineChart lineChart = new LineChart(_subject);
+					_subject.attach(lineChart);
+					_center.add(lineChart.getChart());
+	
+					existingViewers.put(type, lineChart);
+				} else {
+					JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			if (type.equals("Bar Chart")) {
+				if (!existingViewers.containsKey(type)) {
+					BarChart barChart = new BarChart(_subject);
+					_subject.attach(barChart);
+					_center.add(barChart.getChart());
+	
+					existingViewers.put(type, barChart);
+				} else {
+					JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			if (type.equals("Scatter Chart")) {
+				if (!existingViewers.containsKey(type)) {
+					ScatterChart scatterChart = new ScatterChart(_subject);
+					_subject.attach(scatterChart);
+					_center.add(scatterChart.getChart());
+	
+					existingViewers.put(type, scatterChart);
+				} else {
+					JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			if (type.equals("Text Report")) {
+				if (!existingViewers.containsKey(type)) {
+					TextReport textReport = new TextReport(_subject);
+					_subject.attach(textReport);
+					_center.add(textReport.getChart());
+	
+					existingViewers.put(type, textReport);
+				} else {
+					JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			_center.revalidate();
+			_center.repaint();
+		} else {
+			JOptionPane.showMessageDialog(null, "Analysis has been changed, but not updated!\nPlease hit the Recalculate button before attempting to add another viewer.","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
 		}
-		if (type.equals("Line Chart")) {
-			if (!existingViewers.containsKey(type)) {
-				LineChart lineChart = new LineChart(_subject);
-				_subject.attach(lineChart);
-				_center.add(lineChart.getChart());
-
-				existingViewers.put(type, lineChart);
-			} else {
-				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private String revalidateParamSelections(ParamStruct paramStruct, SelectionHandler handler, Vector<String> countryNames) {
+		if (!handler.CheckAnalysisCountry(paramStruct._analysis, paramStruct._country)) {
+			JOptionPane.showMessageDialog(null, paramStruct._country + " is not compatible with the " + paramStruct._analysis + " analysis!","Error On Analysis Change",JOptionPane.INFORMATION_MESSAGE);
+			for(int i = 0; i <= countryNames.size() - 1; i++) {
+				if(handler.CheckAnalysisCountry(paramStruct._analysis, countryNames.elementAt(i))) {
+					return countryNames.elementAt(i);
+				}
 			}
 		}
-		if (type.equals("Bar Chart")) {
-			if (!existingViewers.containsKey(type)) {
-				BarChart barChart = new BarChart(_subject);
-				_subject.attach(barChart);
-				_center.add(barChart.getChart());
-
-				existingViewers.put(type, barChart);
-			} else {
-				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		if (type.equals("Scatter Chart")) {
-			if (!existingViewers.containsKey(type)) {
-				ScatterChart scatterChart = new ScatterChart(_subject);
-				_subject.attach(scatterChart);
-				_center.add(scatterChart.getChart());
-
-				existingViewers.put(type, scatterChart);
-			} else {
-				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		if (type.equals("Text Report")) {
-			if (!existingViewers.containsKey(type)) {
-				TextReport textReport = new TextReport(_subject);
-				_subject.attach(textReport);
-				_center.add(textReport.getChart());
-
-				existingViewers.put(type, textReport);
-			} else {
-				JOptionPane.showMessageDialog(null, type + " already exists!","Error Adding Viewer",JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		_center.revalidate();
-		_center.repaint();
+		return null;
 	}
 	
 	public static void main(String[] args) {
