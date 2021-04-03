@@ -1,6 +1,10 @@
 package selectionModule;
 import java.util.*;
 
+/**
+ * @author steph
+ *
+ */
 public class InitialConfigFetcher {
 	private ConfigDatabaseReader configReader = new ConfigDatabaseReader();
 	Map<String, String> InitialConfigMap = new HashMap<String, String>(); 
