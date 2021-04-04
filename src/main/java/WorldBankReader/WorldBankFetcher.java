@@ -26,10 +26,10 @@ public class WorldBankFetcher {
 	/**
 	 * This method gets the data from the URL string from the World bank API and stores it internally
 	 * 
-	 * @param startYear
-	 * @param endYear
-	 * @param indicator
-	 * @param country
+	 * @param startYear a string representing start year to get data for
+	 * @param endYear a string representing end year to get data for
+	 * @param indicator a string of the indicator to get data for 
+	 * @param country a string representing the countryID to get data for 
 	 */
 	public void getData(String startYear, String endYear, String indicator, String country) {
 		// return Vector<Float> numericData, Vector<Integer> Years, String units
@@ -39,10 +39,10 @@ public class WorldBankFetcher {
 	/**
 	 * This methods takes the URL and formats the string correctly. 
 	 * 
-	 * @param startYear
-	 * @param endYear
-	 * @param indicator
-	 * @param country
+	 * @param startYear a string representing start year to get data for
+	 * @param endYear a string representing end year to get data for
+	 * @param indicator a string of the indicator to get data for 
+	 * @param country a string representing the countryID to get data for
 	 */
 	private void formatURLString(String startYear, String endYear, String indicator, String country) {
 		urlString = String.format("http://api.worldbank.org/v2/country/%s/indicator/%s?date=%s:%s&format=json", country,

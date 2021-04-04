@@ -2,6 +2,7 @@ package selectionModule;
 import java.util.*;
 
 /**
+ * A class for fetching the initial configurations to populate the GUI 
  * @author steph
  *
  */
@@ -9,10 +10,17 @@ public class InitialConfigFetcher {
 	private ConfigDatabaseReader configReader = new ConfigDatabaseReader();
 	Map<String, String> InitialConfigMap = new HashMap<String, String>(); 
 	
+	/**
+	 * a constructor to creat the initial config fetcher and populate the Config map from the initial config database
+	 */
 	public InitialConfigFetcher() {
 		InitialConfigMap = configReader.ReadIntialConfig(); 
 	}
 	
+	/**
+	 * a method for getting the available analyses from the config database. 
+	 * @return a string of vector containing the names of the available analyses. 
+	 */
 	public Vector<String> getAnalysisAvailable() {
 		String AnalysisString = InitialConfigMap.get("Analyses"); 
 		String[] AnalysisArray = AnalysisString.split(",", -1); 
@@ -20,6 +28,10 @@ public class InitialConfigFetcher {
 		return Analysisvector; 
 	}
 	
+	/**
+	 * a method for getting the avaialble countries from the config database
+	 * @return a vector of strings containing available countyr names
+	 */
 	public Vector<String> getCountriesAvailable() {
 		String CountriesString = InitialConfigMap.get("Countries"); 
 		String[] CountriesArray = CountriesString.split(",", -1); 
@@ -27,6 +39,10 @@ public class InitialConfigFetcher {
 		return CountriesVector; 
 	}
 	
+	/**
+	 * a method for getting the available viewer
+	 * @return a vector of string containing the available viewer names
+	 */
 	public Vector<String> getViewersAvailable() {
 		String ViewersString = InitialConfigMap.get("Viewers"); 
 		String[] ViewersArray = ViewersString.split(",", -1); 
@@ -34,7 +50,11 @@ public class InitialConfigFetcher {
 		return Viewersvector; 
 	}
 	
-	public Vector<String> getYearsAvailable() {
+	/**
+	 * a method for getting the available years on the gui
+	 * @return a vector of strings containing the available years
+	 */
+	public Vector<String> getYearsAvailable() { 
 		String YearsString = InitialConfigMap.get("Years"); 
 		String[] YearsArray = YearsString.split(",", -1); 
 		
@@ -49,22 +69,5 @@ public class InitialConfigFetcher {
 		Vector<String> yearsFullVector = new Vector<String>(Arrays.asList(YearsFullArray));
 		return yearsFullVector; 
 	}
-	
-//	public static void main(String[] args)
-//	{
-//		InitialConfigFetcher ConfigHandler = new InitialConfigFetcher(); 
-//		String[] years= ConfigHandler.getYearsAvailable();  
-//		System.out.println(Arrays.toString(years)); 
-//		
-//		String[] Analyses= ConfigHandler.getAnalysisAvailable();  
-//		System.out.println(Arrays.toString(Analyses));
-//		
-//		String[] Viewers= ConfigHandler.getViewersAvailable();  
-//		System.out.println(Arrays.toString(Viewers));
-//		
-//		String[] Countries= ConfigHandler.getCountriesAvailable();  
-//		System.out.println(Arrays.toString(Countries));
-//		
-//	}
 	
 }

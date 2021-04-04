@@ -2,10 +2,10 @@
 package AnalysisComponent;
 import java.util.*;
 
+import ExceptionsPack.ReaderException;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 import statsVisualiser.gui.ParamStruct;
-import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis function from the abstract analysis.
@@ -43,12 +43,8 @@ public class HospitalAnalysis extends Analysis {
 		
 		ReaderResults HospitalBeds = new ReaderResults();
 		ReaderResults HealthExpend = new ReaderResults();
-		//try {
-			HospitalBeds= Reader.RequestData(HospitalBedsIndicator,params._yearStart,params._yearEnd,params._country); 
-			HealthExpend = Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
-		//} catch (ReaderException e) {
-		//	throw e;
-		//} 
+		HospitalBeds= Reader.RequestData(HospitalBedsIndicator,params._yearStart,params._yearEnd,params._country); 
+		HealthExpend = Reader.RequestData(HealthExpendIndicator,params._yearStart,params._yearEnd,params._country); 
 
 		Vector<Double> HospitalBedsData = HospitalBeds.NumericData;
 		Vector<Double> HealthExpendData = HealthExpend.NumericData;
@@ -77,7 +73,7 @@ public class HospitalAnalysis extends Analysis {
 	/**
 	 * @param Element1 vector of elements to be divided
 	 * @param Element2 vector of elements to divide Element1 by 
-	 * @return A vector containing the ratio of Element1/(Element2*1000)
+	 * @return A vector containing the ratio of Element1/(Element2/1000)
 	 */
 	private Vector<Double> ConvertCalculateRatio(Vector<Double> Element1,Vector<Double>Element2) {
 		Vector<Double> Ratio = new Vector<Double>();
@@ -85,7 +81,7 @@ public class HospitalAnalysis extends Analysis {
 		for(int i = 0; i < Element1.size(); i++)
 		{
 			if (Element2.get(i) != 0){
-				Ratio.add(Element1.get(i)/(Element2.get(i)*1000));
+				Ratio.add(Element1.get(i)/(Element2.get(i)/1000));
 			}
 			else {
 				Ratio.add(0.0);

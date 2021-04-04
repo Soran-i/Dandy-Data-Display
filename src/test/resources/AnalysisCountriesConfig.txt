@@ -5,4 +5,4 @@ Forest:none
 Education Expend:canada
 Hospital Beds vs Health Expend:none
 Health Expend vs Mortality:none
-Education Expend vs Health Expend:none
+Education Expend vs Health Expend:japan

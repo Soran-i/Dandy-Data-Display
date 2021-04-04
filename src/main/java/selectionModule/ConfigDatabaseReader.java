@@ -27,8 +27,6 @@ public class ConfigDatabaseReader {
 		AnalysisCountriesPath = "src/test/resources/AnalysisCountriesConfig.txt";
 		InitialConfigPath = "src/test/resources/InitialConfig.txt";
 		CountryLookupPath = "src/test/resources/countrylookupConfig.txt";
-        //System.out.println(AnalysisViewersPath);
-        //System.out.println(AnalysisCountriesPath);
 	}
 	
 	/**
@@ -118,23 +116,6 @@ public class ConfigDatabaseReader {
 
     return map;
 	}
-	
-	
-	
-//	public static void main(String[] args)
-//	{
-//		ConfigDatabaseReader configReader = new ConfigDatabaseReader(); 
-//	
-//	    // read text file to HashMap
-//	    Map<String, String> mapFromFile
-//	        = configReader.ReadCountryLookupConfig();
-//	
-//	    // iterate over HashMap entries
-//	    for (Map.Entry<String, String> entry :
-//	         mapFromFile.entrySet()) {
-//	        System.out.println(entry.getKey() + " : "
-//	                           + entry.getValue());
-//	    }
-//	}
+
 }
 	

@@ -16,9 +16,10 @@ public interface Login {
     /**
      * @author Soran
      * @param userCredentials This is the JSON object that is going to be passed with the user credentials
-     * @throws JsonIOException 
-     * @throws JsonSyntaxException
-     * @throws FileNotFoundException
+     * @throws JsonIOException Exceptions for Json IO
+     * @throws JsonSyntaxException Exception for Json Syntax
+     * @throws FileNotFoundException Exceptions for when file is not found
+     * @return a boolean defining if the user is valid or not
      */
     
     public boolean verifyUserInfo(JsonObject userCredentials) throws JsonIOException, JsonSyntaxException, FileNotFoundException;

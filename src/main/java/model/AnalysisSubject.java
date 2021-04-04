@@ -2,7 +2,7 @@ package model;
 
 
 import AnalysisComponent.*;
-import statsVisualiser.gui.ReaderException;
+import ExceptionsPack.ReaderException;
 import statsVisualiser.gui.ParamStruct;
 
 
@@ -32,6 +32,7 @@ public class AnalysisSubject extends ViewerSubject {
 	* It automatically creates results by performing the provided analysis.
 	* 
 	* @param params A ParamStruct which contains all of the desired parameters for the Analysis
+	* @throws ReaderException a reader exception which occurs fromt he world bank reader
 	*/
 	public AnalysisSubject(ParamStruct params) throws ReaderException {
 		setParams(params);
@@ -89,6 +90,7 @@ public class AnalysisSubject extends ViewerSubject {
 	
 	/**
 	* This method performs the currently stored analysis and updates the results and attached viewers.
+	* @throws ReaderException a reader exception 
 	*/
 	public void recalculate() throws ReaderException {
 		if(_analysis != null) {
@@ -105,6 +107,7 @@ public class AnalysisSubject extends ViewerSubject {
 	
 	/**
 	* This method returns the stored results obtained from the analysis.
+	* @return the Results struct of  subject
 	*/
 	public ResultsStruct getResults() {
 		return _results;

@@ -11,8 +11,17 @@ import AnalysisComponent.HospitalAnalysis;
 import AnalysisComponent.PolnForestAnalysis;
 import statsVisualiser.gui.ParamStruct;
 
+/**
+ * a class that is part of the factory method used to create analyses for the modeler client. 
+ * @author steph
+ *
+ */
 public class AnalysisConcreteFactory extends AnalysisFactory {
 	
+	/**
+	 * method defining the creation operation of the factory to create specific types of analyses
+	 * @return Analysis defining the type of analysis to be performed
+	 */
 	public Analysis GetAnalysis(ParamStruct params) {
 		
 		if(params._analysis.equals("Emissions vs Energy vs Pollution")) {
