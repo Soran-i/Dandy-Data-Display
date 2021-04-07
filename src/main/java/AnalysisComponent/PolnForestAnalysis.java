@@ -2,10 +2,10 @@ package AnalysisComponent;
 
 import java.util.*;
 
+import ExceptionsPack.ReaderException;
 import WorldBankReader.ReaderResults;
 import WorldBankReader.WorldBankFacade;
 import statsVisualiser.gui.ParamStruct;
-import statsVisualiser.gui.ReaderException;
 
 /**
  * This class is a concrete analysis that implements the performAnalysis

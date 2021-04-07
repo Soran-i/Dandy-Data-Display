@@ -2,13 +2,15 @@ package loginComponent;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Soran
+ * The main class creted a login JFrame that is used to start the program
+ */
 public class App {
 
 	/**
-	 * @author Soran
-	 * The main class creted a login JFrame that is used to start the program
+	 * the main method for running the program
 	 */
-
 	public static void main(String args[]) {
 		
     	JFrame frame = LoginGUI.getInstance();

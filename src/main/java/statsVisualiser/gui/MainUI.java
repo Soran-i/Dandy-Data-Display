@@ -14,6 +14,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import ExceptionsPack.CountryAnalysisException;
+import ExceptionsPack.EndYearException;
+import ExceptionsPack.ReaderException;
+import ExceptionsPack.StartYearException;
+import ExceptionsPack.ViewerAnalysisException;
+
 import javax.swing.JOptionPane;
 
 import selectionModule.InitialConfigFetcher;
@@ -21,10 +28,12 @@ import selectionModule.SelectionHandler;
 import model.AnalysisSubject;
 import viewer.*;
 
+/**
+ * A class for running the main GUI program using Jframe. Is implemented as a singleton
+ * @author all
+ *
+ */
 public class MainUI extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static MainUI instance;
@@ -40,6 +49,10 @@ public class MainUI extends JFrame {
 	private String _prevViewer;
 	private Boolean analysisUpdated = true;
 
+	/**
+	 * the get instance method of the UI that allows for only a single instantiation of the UI to be in exsistence. Implements the singleton design pattern. 
+	 * @return MainUI a pointer to the only exsistence of the MainUI
+	 */
 	public static MainUI getInstance() {
 		if (instance == null)
 			instance = new MainUI();
@@ -47,6 +60,9 @@ public class MainUI extends JFrame {
 		return instance;
 	}
 
+	/**
+	 * a constructor for the mainUI creating all components using Jframe
+	 */
 	private MainUI() {
 		// Set window title
 
@@ -184,7 +200,6 @@ public class MainUI extends JFrame {
 					clearViewers();
 					_prevAnalysis = analysisID;
 					paramStruct._analysis = analysisID;
-					System.out.println(paramStruct._country);
 					String newCountrySelection = revalidateParamSelections(paramStruct, handler, countriesNames);
 					if(newCountrySelection != null) {
 						try {
@@ -299,6 +314,13 @@ public class MainUI extends JFrame {
 		getContentPane().add(_center, BorderLayout.CENTER);
 	}
 
+	/**
+	 * a method for setting the country parameters and performing necessary UI operations
+	 * @param countryName the country name selected by user
+	 * @param paramStruct the parameter struct to be updated
+	 * @param handler the handler to perform checks of the inputs
+	 * @throws CountryAnalysisException an exception for when incorrect analyses are selected
+	 */
 	private void setCountryParam(String countryName, ParamStruct paramStruct, SelectionHandler handler)
 			throws CountryAnalysisException {
 		if (handler.CheckAnalysisCountry(paramStruct._analysis, countryName)) {
@@ -311,6 +333,13 @@ public class MainUI extends JFrame {
 		}
 	}
 
+	/**
+	 * a method for setting the end year and performing necessary checks
+	 * @param EndYear the end year selected by user
+	 * @param paramStruct the parameter struct to be updated
+	 * @param handler the handler performing the checks
+	 * @throws EndYearException the exceptions thrown for incompatible end years
+	 */
 	private void setEndYear(String EndYear, ParamStruct paramStruct, SelectionHandler handler) throws EndYearException {
 		if (handler.CheckYears(paramStruct._yearStart, EndYear)) {
 			_prevEndYear = EndYear;
@@ -320,6 +349,13 @@ public class MainUI extends JFrame {
 		}
 	}
 
+	/**
+	 * a method for checking the start year and updating it
+	 * @param StartYear the start year selected by the user
+	 * @param paramStruct a parameter struct to be updated
+	 * @param handler the selection handler to check the selections
+	 * @throws StartYearException the exceptions to be thrown if invalid
+	 */
 	private void setStartYear(String StartYear, ParamStruct paramStruct, SelectionHandler handler)
 			throws StartYearException {
 		if (handler.CheckYears(StartYear, paramStruct._yearEnd)) {
@@ -330,6 +366,13 @@ public class MainUI extends JFrame {
 		}
 	}
 
+	/**
+	 * a method for checking the viewer selections
+	 * @param ViewerName the name of the viewer selected
+	 * @param paramStruct a structure containing the selected parameters
+	 * @param handler a selection handler for doing the checking
+	 * @throws ViewerAnalysisException exception to be thrown if incorrect viewer
+	 */
 	private void CheckViewerParam(String ViewerName, ParamStruct paramStruct, SelectionHandler handler)
 			throws ViewerAnalysisException {
 		if (!handler.CheckAnalysisViewer(paramStruct._analysis, ViewerName)) {
@@ -337,6 +380,12 @@ public class MainUI extends JFrame {
 		}
 	}
 
+	/**
+	 * a method defining the initiation for the parameter struct
+	 * @param params the parameter struct to be initialized
+	 * @param fetcher the Initial config fetcher to get the intializations lists 
+	 * @param handler a selection handler to check the settings
+	 */
 	private void InitializeParamStruct(ParamStruct params, InitialConfigFetcher fetcher, SelectionHandler handler) {
 		Vector<String> methodsNames = fetcher.getAnalysisAvailable();
 		Vector<String> countriesNames = fetcher.getCountriesAvailable();
@@ -350,6 +399,9 @@ public class MainUI extends JFrame {
 		params._country = CountryId;
 	}
 	
+	/**
+	 * a method for clearing all the viewers from the display space
+	 */
 	private void clearViewers() {
 		Object[] keySet = existingViewers.keySet().toArray();
 		for(Object index:keySet) {
@@ -388,6 +440,10 @@ public class MainUI extends JFrame {
 		_center.repaint();
 	}
 	
+	/**
+	 * a method for adding viewers to the display space
+	 * @param type the tupe of viewer to be added
+	 */
 	private void addViewer(String type) {
 		if(analysisUpdated) {
 			if (type.equals("Pie Chart")) {
@@ -453,6 +509,13 @@ public class MainUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * a method for validating the selections
+	 * @param paramStruct the paramter struct to be validated
+	 * @param handler a selection handler to do the verification
+	 * @param countryNames the list of country names that are available
+	 * @return a string containing the country label if invalid one is selected or null otherwise
+	 */
 	private String revalidateParamSelections(ParamStruct paramStruct, SelectionHandler handler, Vector<String> countryNames) {
 		if (!handler.CheckAnalysisCountry(paramStruct._analysis, paramStruct._country)) {
 			JOptionPane.showMessageDialog(null, paramStruct._country + " is not compatible with the " + paramStruct._analysis + " analysis!","Error On Analysis Change",JOptionPane.INFORMATION_MESSAGE);
@@ -465,13 +528,13 @@ public class MainUI extends JFrame {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-
-		JFrame frame = MainUI.getInstance();
-		frame.setSize(900, 600);
-		frame.pack();
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//
+//		JFrame frame = MainUI.getInstance();
+//		frame.setSize(900, 600);
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
 	// TODO Auto-generated method stub
 
 }

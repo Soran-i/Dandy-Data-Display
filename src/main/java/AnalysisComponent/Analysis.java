@@ -2,8 +2,8 @@ package AnalysisComponent;
 
 import java.util.*;
 
+import ExceptionsPack.ReaderException;
 import statsVisualiser.gui.ParamStruct;
-import statsVisualiser.gui.ReaderException;
 
 /**
  * This is the abstract class defining the method perform Analysis that are implemented in the concrete Analyses. 

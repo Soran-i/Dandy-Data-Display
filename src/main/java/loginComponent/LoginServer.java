@@ -11,7 +11,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 /**
- * @uathor Soran
+ * @author Soran
  * Real login server deligated by the proxy server
  */
 
